@@ -11,7 +11,7 @@ import SwiftUI
 struct EdufyAppApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            OnboardingView()
         }
     }
 }

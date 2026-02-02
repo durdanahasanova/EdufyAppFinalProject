@@ -1,102 +1,97 @@
-//
-//  SplashScreenView.swift
-//  EdufyApp
-//
-//  Created by Durdana on 23.01.26.
-//
-
 import SwiftUI
 
 struct OnboardingStep {
-    var title: String
-    var description: String
-    var image: String
-    var color: Color
+    let tittle: String
+    let describtion: String
+    let image: String
+    let color: Color
 }
 
 struct OnboardingView: View {
     
-    private let steps = [
+    private let steps: [OnboardingStep] = [
+        OnboardingStep(tittle: "Yeni biliklər\nkəşf et", describtion: "Yüzlərlə kurs arasından sənə\nən uyğun olanı tap", image: "splashfirstimage" , color: Color("primaryPurple")),
         
-        OnboardingStep(title: "Yeni biliklər\nkəşf et", description: "Yüzlərlə kurs arasından sənə\nən uyğun olanı tap", image: "splashfirstimage", color: Color( "primaryPurple")),
-        OnboardingStep(title: "Öz biliklərini\npaylaş!", description: "Öz kursunu yarat və biliklərini\nhər kəsə çatdır", image: "splashsecondimage", color: Color("primaryOrange"))
+        OnboardingStep(tittle: "Öz biliklərini\npaylaş!", describtion: "Öz kursunu yarat və biliklərini\nhər kəsə çatdır", image: "splashsecondimage", color: Color("primaryOrange"))
+        
     ]
     
-    @State private var currentStep = 0
+    @State private var currentIndex = 0
+    private var isLastStep: Bool { currentIndex == steps.count - 1 }
+    private var currentStep: OnboardingStep { steps[currentIndex] }
     
     var body: some View {
         ZStack {
-            
-            steps[currentStep].color
+            currentStep.color
                 .ignoresSafeArea()
-                .animation(.easeInOut, value: currentStep)
+                .animation(.easeInOut, value: currentIndex)
             
             VStack(spacing: 12) {
                 Spacer()
                 
                 VStack(spacing: 16) {
-                    Text(steps[currentStep].title)
+                    Text(currentStep.tittle)
                         .appFont(.headerBold)
                         .multilineTextAlignment(.center)
                     
-                    Text(steps[currentStep].description)
-                        .font(.system(size: 18))
+                    Text(currentStep.describtion)
+                        .appFont(.headingMdMedium)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
                 }
                 
                 Spacer()
                 
-                Image(steps[currentStep].image)
+                Image(currentStep.image)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 390)
-                    .id(steps[currentStep].image)
                 
                 Spacer()
                 
-                VStack(spacing: 24){
+                VStack(spacing: 24) {
                     HStack(spacing: 8) {
-                        Capsule()
-                            .fill(currentStep == 0 ? Color.black : Color.white.opacity(0.5))
-                            .frame(width: currentStep == 0 ? 36 : 10, height: 10)
-                        
-                        Capsule()
-                            .fill(currentStep == 1 ? Color.black : Color.white.opacity(0.5))
-                            .frame(width: currentStep == 1 ? 36 : 10, height: 10)
+                        ForEach(0 ..< steps.count, id: \.self) { index in
+                            Capsule()
+                                .fill(currentIndex == index ? .black : .white.opacity(0.5))
+                                .frame(width: currentIndex == index ? 36 : 10, height: 10)
+                            
+                        }
                     }
+                    .animation(.spring(), value: currentIndex)
                     
-                    HStack{
-                        
-                        Button(action: {
-                            if currentStep > 0 {
-                                withAnimation { currentStep -= 1 }
+                    HStack {
+                        Button {
+                            withAnimation(.easeInOut) {
+                                if currentIndex > 0 {
+                                    currentIndex -= 1
+                                }
                             }
-                        }) {
+                        } label: {
                             Text("Back")
-                                .fontWeight(.semibold)
+                                .appFont(.headingMdMedium)
                                 .foregroundColor(.black)
                                 .padding(.vertical, 12)
                                 .padding(.horizontal, 24)
                         }
-                        .opacity(currentStep == 0 ? 0 : 1)
-                        .disabled(currentStep == 0)
+                        .opacity(currentIndex == 0 ? 0 : 1)
+                        .disabled(currentIndex == 0)
                         
                         Spacer()
                         
-                        
                         Button(action: {
-                            if currentStep < steps.count - 1 {
-                                withAnimation { currentStep += 1 }
-                            } else {
-                                print("Onboarding bitdi")
-                                
+                            withAnimation(.easeInOut) {
+                                if currentIndex < 1 {
+                                    currentIndex += 1
+                                } else {
+                                    print("Onboarding bitdi")
+                                }
                             }
-                        }){
+                        }) {
                             HStack(spacing: 10) {
-                                Text(currentStep == steps.count - 1 ? "Başla" : "Növbəti")
-                                    .fontWeight(.semibold)
-                                Image(systemName: "chevron.right")
+                                Text(isLastStep ? "Başla" : "Növbəti")
+                                    .appFont(.headingMdMedium)
+                                Image("chevron_right")
                             }
                             .padding(.vertical, 12)
                             .padding(.horizontal, 25)
@@ -106,25 +101,13 @@ struct OnboardingView: View {
                         }
                     }
                     .padding(.horizontal, 20)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 32)
                 }
             }
-            
         }
     }
-    
-    //    var backgroundColor: Color {
-    //        currentStep == 0 ? Color("primaryPurple") : Color("primaryOrange")
-    //    }
 }
-
 
 #Preview {
     OnboardingView()
 }
-
-
-
-
-
-

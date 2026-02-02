@@ -17,17 +17,27 @@ enum MontserratWeight: String {
 struct FontStyle {
     let size: CGFloat
     let weight: MontserratWeight
-    //let linespacing: CGFloat
+    let linespacing: CGFloat
 }
 
 enum TextStyle {
     case headerBold
+    case headingMdRegular
+    case headingMdMedium
+    case bodyTextMdRegular
+    
     
     
     var textConfigure: FontStyle {
         switch self {
         case .headerBold:
-            return FontStyle(size: 40, weight: .bold)
+            return FontStyle(size: 40, weight: .bold, linespacing: 44)
+        case .headingMdRegular:
+            return FontStyle(size: 17, weight: .regular, linespacing: 24)
+        case .headingMdMedium:
+            return FontStyle(size: 17, weight: .medium, linespacing: 24)
+        case .bodyTextMdRegular:
+            return FontStyle(size: 16, weight: .regular, linespacing: 24)
         }
     }
 }
