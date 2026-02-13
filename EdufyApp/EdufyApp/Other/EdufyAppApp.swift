@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct EdufyAppApp: App {
+    @State private var showOnboarding = true
     var body: some Scene {
         WindowGroup {
-            OnboardingView()
+            if showOnboarding {
+                OnboardingView(showOnboarding: $showOnboarding)
+            } else {
+                LoginView()
+            }
         }
     }
 }

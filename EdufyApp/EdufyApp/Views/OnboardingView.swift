@@ -9,6 +9,7 @@ struct OnboardingStep {
 
 struct OnboardingView: View {
     
+    @Binding var showOnboarding: Bool
     private let steps: [OnboardingStep] = [
         OnboardingStep(tittle: "Yeni biliklər\nkəşf et", describtion: "Yüzlərlə kurs arasından sənə\nən uyğun olanı tap", image: "splashfirstimage" , color: Color("primaryPurple")),
         
@@ -65,6 +66,8 @@ struct OnboardingView: View {
                             withAnimation(.easeInOut) {
                                 if currentIndex > 0 {
                                     currentIndex -= 1
+                                } else {
+                                    showOnboarding = false
                                 }
                             }
                         } label: {
@@ -84,6 +87,7 @@ struct OnboardingView: View {
                                 if currentIndex < 1 {
                                     currentIndex += 1
                                 } else {
+                                    showOnboarding = false
                                     print("Onboarding bitdi")
                                 }
                             }
@@ -108,6 +112,4 @@ struct OnboardingView: View {
     }
 }
 
-#Preview {
-    OnboardingView()
-}
+

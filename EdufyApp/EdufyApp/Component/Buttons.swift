@@ -17,36 +17,49 @@ struct Buttons: View {
     
     let title: String
     let style: ButtonStyle
-    let action: () -> Void
+    var action: (() -> Void)? = nil
+    var isEnabled: Bool = true
     
     var body: some View {
-        Button(action: action) {
-            Text(title)
-                .appFont(.bodyTextMdRegular)
-                .frame(maxWidth: .infinity)
-                .padding(16)
-                .foregroundStyle(textColor)
-                .background(backgroundView)
-                .cornerRadius(24)
-            
-                .overlay(RoundedRectangle(cornerRadius: 24)
-                    .stroke(style == .secondaryLargeButton ? .primaryYellow : .clear, lineWidth: 1))
+        Group {
+            if let action {
+                Button(action: action) {
+                    content
+                }
+                .disabled(!isEnabled || style == .disableLargeButton)
+            } else {
+                content
+            }
         }
-        .padding(20)
-        .disabled(style == .disableLargeButton)
+        .opacity((!isEnabled || style == .disableLargeButton) ? 0.7 : 1.0)
+        .contentShape(RoundedRectangle(cornerRadius: 24))
+    }
+    
+    
+    var content: some View {
+        Text(title)
+            .appFont(.bodyTextMdRegular)
+            .frame(maxWidth: .infinity)
+            .padding(16)
+            .foregroundStyle(textColor)
+            .background(backgroundView)
+            .clipShape(RoundedRectangle(cornerRadius: 24))
+        
+            .overlay(RoundedRectangle(cornerRadius: 24)
+                .stroke(style == .secondaryLargeButton ? .primaryYellow : .clear, lineWidth: 1))
     }
     
     @ViewBuilder
-        private var backgroundView: some View {
-            switch style {
-            case .primaryLargeButton:
-                Color.yellow
-            case .secondaryLargeButton:
-                Color.clear
-            case .disableLargeButton:
-                Color.whiteDisable
-            }
+    private var backgroundView: some View {
+        switch style {
+        case .primaryLargeButton:
+            Color.yellow
+        case .secondaryLargeButton:
+            Color.clear
+        case .disableLargeButton:
+            Color.whiteDisable
         }
+    }
     
     private var textColor: Color {
         switch style {
