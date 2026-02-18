@@ -3,6 +3,7 @@ import SwiftUI
 struct LoginView: View {
 
     @StateObject private var viewModel = LoginViewModel()
+    @Binding var isLoggedIn: Bool
 
     var body: some View {
         NavigationStack {
@@ -43,7 +44,10 @@ struct LoginView: View {
                     Buttons(
                         title: "Daxil ol",
                         style: viewModel.isActiveInput ? .primaryLargeButton : .disableLargeButton,
-                        action: { viewModel.login() } 
+                        action: {
+                            viewModel.login()
+                            isLoggedIn = true
+                        }
                     )
                     .disabled(!viewModel.isActiveInput)
 
@@ -54,7 +58,7 @@ struct LoginView: View {
                             .foregroundStyle(.whiteHigh)
                             .appFont(.bodyTextMdRegular)
 
-                        NavigationLink(destination: RegisterView()) {
+                        NavigationLink(destination: RegisterView(isLoggedIn: $isLoggedIn)) {
                             Buttons(title: "Qeydiyyatdan keç", style: .secondaryLargeButton)
                         }
                     }
@@ -66,6 +70,6 @@ struct LoginView: View {
     }
 }
 
-#Preview {
-    LoginView()
-}
+//#Preview {
+//    LoginView()
+//}
