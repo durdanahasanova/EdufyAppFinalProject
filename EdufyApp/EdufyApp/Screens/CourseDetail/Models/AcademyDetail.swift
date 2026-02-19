@@ -12,13 +12,11 @@ struct AcademyDetail: Identifiable {
     let name: String
     let logoName: String
     let aboutText: String
-    let stats: [StatItem]
-    //let program: [Program]
+    let programs: [Program]
     
+    let applicationCount: String
+    let studentCount: String
+    let graduatePercentage: String
 }
 
-struct StatItem: Identifiable {
-    let id = UUID()
-    let value: String
-    let label: String
-}
+

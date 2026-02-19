@@ -23,12 +23,18 @@ struct FontStyle {
 enum TextStyle {
     case headerBold
     case titleSmBold
+    case titleLMedium
     case titleLSemibold
+    case titleLExtrabold
     case headingMdRegular
     case headingMdMedium
+    case headingMdSemibold
     case bodyTextMdRegular
     case bodyTextMdBold
+    case bodyTextSmRegular
+    case textLRegular
     case textMdMedium
+    
     
     var textConfigure: FontStyle {
         switch self {
@@ -40,17 +46,31 @@ enum TextStyle {
             
         case .titleLSemibold:
             return FontStyle(size: 28, weight: .bold, linespacing: 36)
+            
+        case .titleLMedium:
+            return FontStyle(size: 28, weight: .medium, linespacing: 36)
+        
+        case .titleLExtrabold:
+            return FontStyle(size: 24, weight: .bold, linespacing: 32)
 
             
         case .headingMdRegular:
             return FontStyle(size: 17, weight: .regular, linespacing: 24)
         case .headingMdMedium:
             return FontStyle(size: 17, weight: .medium, linespacing: 24)
+        case .headingMdSemibold:
+            return FontStyle(size: 17, weight: .semibold, linespacing: 24)
             
         case .bodyTextMdRegular:
             return FontStyle(size: 16, weight: .regular, linespacing: 24)
         case .bodyTextMdBold:
             return FontStyle(size: 16, weight: .bold, linespacing: 24)
+        
+        case .bodyTextSmRegular:
+            return FontStyle(size: 15, weight: .regular, linespacing: 20)
+            
+        case .textLRegular:
+            return FontStyle(size: 14, weight: .regular, linespacing: 18)
             
         case .textMdMedium:
             return FontStyle(size: 13, weight: .medium, linespacing: 18)
