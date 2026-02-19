@@ -3,6 +3,7 @@ import SwiftUI
 struct RegisterView: View {
 
     @StateObject private var viewModel = RegisterViewModel()
+    @Binding var isLoggedIn: Bool
 
     var body: some View {
         NavigationStack {
@@ -68,7 +69,7 @@ struct RegisterView: View {
                             .foregroundStyle(.whiteHigh)
                             .appFont(.bodyTextMdRegular)
 
-                        NavigationLink(destination: LoginView()) {
+                        NavigationLink(destination: LoginView(isLoggedIn: $isLoggedIn)) {
                             
                             Buttons(title: "Daxil ol", style: .secondaryLargeButton)
                         }
@@ -81,6 +82,6 @@ struct RegisterView: View {
     }
 }
 
-#Preview {
-    RegisterView()
-}
+//#Preview {
+//    RegisterView()
+//}
