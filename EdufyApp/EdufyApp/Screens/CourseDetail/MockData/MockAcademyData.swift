@@ -34,35 +34,35 @@ struct MockAcademyData {
             id: "p1",
             title: "Marketing Automation &\nReporting",
             duration: "4 ay",
-            imageName: "program_thumbnail",
+            imageName: "examplephoto",
             status: .active
         ),
         Program(
             id: "p2",
             title: "iOS Developer",
             duration: "4 ay",
-            imageName: "program_thumbnail",
+            imageName: "examplephoto",
             status: .active
         ),
         Program(
             id: "p3",
             title: "Backend Java Developer",
             duration: "4 ay",
-            imageName: "program_thumbnail",
+            imageName: "examplephoto",
             status: .active
         ),
         Program(
             id: "p4",
             title: "Backend Java Developer",
             duration: "4 ay",
-            imageName: "program_thumbnail",
+            imageName: "person",
             status: .active
         ),
         Program(
             id: "p5",
             title: "Backend Java Developer",
             duration: "4 ay",
-            imageName: "program_thumbnail",
+            imageName: "person",
             status: .active
         )
     ]
