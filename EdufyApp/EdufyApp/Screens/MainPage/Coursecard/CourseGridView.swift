@@ -16,8 +16,12 @@ struct CourseGridView: View {
             LazyHStack(spacing: 16) {
                 ForEach(viewModel.courses) { course in
                     
-                    CourseCard(course: course, backgroundColor: .primaryOrange)
-                    .frame(width: 320)
+                    NavigationLink {
+                        CourseDetailView(viewModel: AcademyDetailViewModel(academyId: course.id))
+                    } label: {
+                        CourseCard(course: course, backgroundColor: .primaryOrange)
+                            .frame(width: 320)
+                    }
                 }
             }
         }
