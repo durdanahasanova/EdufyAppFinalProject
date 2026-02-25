@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5EA6C6962F4CD30300777206 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5EA6C6952F4CD30300777206 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		5E869B9E2F222D300057EC4F /* EdufyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EdufyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EA6C6962F4CD30300777206 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = EdufyApp;
 			packageProductDependencies = (
+				5EA6C6952F4CD30300777206 /* Kingfisher */,
 			);
 			productName = EdufyApp;
 			productReference = 5E869B9E2F222D300057EC4F /* EdufyApp.app */;
@@ -109,6 +115,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				5E869BAC2F2230C30057EC4F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5EA6C6942F4CD30300777206 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5E869B9F2F222D300057EC4F /* Products */;
@@ -364,7 +371,23 @@
 				minimumVersion = 12.8.0;
 			};
 		};
+		5EA6C6942F4CD30300777206 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.7.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5EA6C6952F4CD30300777206 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EA6C6942F4CD30300777206 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5E869B962F222D2F0057EC4F /* Project object */;
 }

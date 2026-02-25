@@ -23,6 +23,7 @@ struct FontStyle {
 enum TextStyle {
     case headerBold
     case titleSmBold
+    case titleMdSemibold
     case titleLMedium
     case titleLSemibold
     case titleLExtrabold
@@ -30,6 +31,7 @@ enum TextStyle {
     case headingMdMedium
     case headingMdSemibold
     case bodyTextMdRegular
+    case bodyTextSmMedium
     case bodyTextMdBold
     case bodyTextSmRegular
     case textLRegular
@@ -43,6 +45,9 @@ enum TextStyle {
             
         case .titleSmBold:
             return FontStyle(size: 20, weight: .bold, linespacing: 28)
+            
+        case .titleMdSemibold:
+            return FontStyle(size: 22, weight: .semibold, linespacing: 32)
             
         case .titleLSemibold:
             return FontStyle(size: 28, weight: .bold, linespacing: 36)
@@ -65,9 +70,14 @@ enum TextStyle {
             return FontStyle(size: 16, weight: .regular, linespacing: 24)
         case .bodyTextMdBold:
             return FontStyle(size: 16, weight: .bold, linespacing: 24)
+            
+        
         
         case .bodyTextSmRegular:
             return FontStyle(size: 15, weight: .regular, linespacing: 20)
+            
+        case .bodyTextSmMedium:
+            return FontStyle(size: 15, weight: .medium, linespacing: 20)
             
         case .textLRegular:
             return FontStyle(size: 14, weight: .regular, linespacing: 18)
