@@ -15,6 +15,8 @@ struct Instructor: Identifiable, Codable {
     let linkedinUrl: String?
     
     enum CodingKeys: String, CodingKey {
-        case id, name, bio, imageUrl, linkedinUrl
+        case id, name, bio
+        case imageUrl = "image_url"
+        case linkedinUrl = "linkedin_url"
     }
 }

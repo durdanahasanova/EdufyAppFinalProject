@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct ProgramModule: Identifiable, Codable {
+struct ProgramModule: Identifiable, Decodable {
     let id: String
     let title: String
-    let lessonsTittle: String
+    let lessons: [Lesson]
+}
+
+struct Lesson: Identifiable, Decodable {
+    let id: String
+    let title: String
     let topics: [String]
-    
-    enum CodingKeys: String, CodingKey {
-        case id, title, lessonsTittle, topics
-    }
-    
 }

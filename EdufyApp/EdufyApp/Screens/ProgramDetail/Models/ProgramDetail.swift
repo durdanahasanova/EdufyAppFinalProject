@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct ProgramDetail: Identifiable, Codable {
+
+struct ProgramDetail: Identifiable, Decodable {
     let id: String
     let name: String
     let description: String
@@ -18,6 +19,7 @@ struct ProgramDetail: Identifiable, Codable {
     let instructor: Instructor?
     
     enum CodingKeys: String, CodingKey {
-        case id, name, description, duration, groupSize, logoName, modules, instructor
+        case id, name, description, duration, logoName, modules, instructor
+        case groupSize = "group_size"
     }
 }

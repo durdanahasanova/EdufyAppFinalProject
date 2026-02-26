@@ -21,6 +21,9 @@ struct CourseDetailView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .navigationDestination(item: $viewModel.selectedProgram, destination: { program in
+            ProgramDetailView(viewModel: ProgramDetailViewModel(programId: program.id))
+        })
         .task {
             await viewModel.fetchAcademyDetail()
         }

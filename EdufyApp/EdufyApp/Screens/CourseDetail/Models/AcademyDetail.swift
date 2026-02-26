@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AcademyDetail: Identifiable {
+struct AcademyDetail: Identifiable, Decodable {
     let id: String
     let name: String
     let logoName: String

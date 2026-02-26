@@ -1,10 +1,3 @@
-//
-//  ProgramMockData.swift
-//  EdufyApp
-//
-//  Created by Durdana on 24.02.26.
-//
-
 import Foundation
 
 struct ProgramMockData {
@@ -21,44 +14,48 @@ struct ProgramMockData {
             ProgramModule(
                 id: "1",
                 title: "Modul 1: Fundamentals",
-                lessonsTittle: "Introduction to Swift",
-                topics: [
-                    "Xcode setup, Playgrounds",
-                    "Swift basics: Constants, Variables, Type Safety and Type",
-                    "Inference, Basic Operators"
+                lessons: [
+                    Lesson(id: "1a", title: "Introduction to Swift", topics: [
+                        "Xcode setup, Playgrounds",
+                        "Swift basics: Constants, Variables, Type Safety",
+                        "Inference, Basic Operators"
+                    ])
                 ]
             ),
             ProgramModule(
                 id: "2",
-                title: "Modul 1: UI development with UIKit",
-                lessonsTittle: "Building User Interfaces",
-                topics: [
-                    "UIKit fundamentals",
-                    "Auto Layout",
-                    "Table Views and Collection Views",
-                    "Navigation Patterns"
+                title: "Modul 2: UI development with UIKit",
+                lessons: [
+                    Lesson(id: "2a", title: "Building User Interfaces", topics: [
+                        "UIKit fundamentals",
+                        "Auto Layout",
+                        "Table Views and Collection Views",
+                        "Navigation Patterns"
+                    ])
                 ]
             ),
             ProgramModule(
                 id: "3",
-                title: "Modul 1: Fundamentals",
-                lessonsTittle: "Advanced Swift Concepts",
-                topics: [
-                    "Protocols and Extensions",
-                    "Generics",
-                    "Error Handling",
-                    "Memory Management"
+                title: "Modul 3: Advanced Swift",
+                lessons: [
+                    Lesson(id: "3a", title: "Advanced Swift Concepts", topics: [
+                        "Protocols and Extensions",
+                        "Generics",
+                        "Error Handling",
+                        "Memory Management"
+                    ])
                 ]
             ),
             ProgramModule(
                 id: "4",
-                title: "Modul 1: Fundamentals",
-                lessonsTittle: "Final Project",
-                topics: [
-                    "Project Planning",
-                    "Architecture Design",
-                    "Implementation",
-                    "Testing and Deployment"
+                title: "Modul 4: Final Project",
+                lessons: [
+                    Lesson(id: "4a", title: "Final Project", topics: [
+                        "Project Planning",
+                        "Architecture Design",
+                        "Implementation",
+                        "Testing and Deployment"
+                    ])
                 ]
             )
         ],
@@ -82,22 +79,24 @@ struct ProgramMockData {
         modules: [
             ProgramModule(
                 id: "1",
-                title: "Marketing Fundamentals",
-                lessonsTittle: "Introduction to Marketing",
-                topics: [
-                    "Marketing Strategy",
-                    "Customer Segmentation",
-                    "Market Analysis"
+                title: "Modul 1: Marketing Fundamentals",
+                lessons: [
+                    Lesson(id: "1a", title: "Introduction to Marketing", topics: [
+                        "Marketing Strategy",
+                        "Customer Segmentation",
+                        "Market Analysis"
+                    ])
                 ]
             ),
             ProgramModule(
                 id: "2",
-                title: "Automation Tools",
-                lessonsTittle: "Modern Marketing Tools",
-                topics: [
-                    "HubSpot CRM",
-                    "Mailchimp",
-                    "Google Analytics"
+                title: "Modul 2: Automation Tools",
+                lessons: [
+                    Lesson(id: "2a", title: "Modern Marketing Tools", topics: [
+                        "HubSpot CRM",
+                        "Mailchimp",
+                        "Google Analytics"
+                    ])
                 ]
             )
         ],
@@ -121,35 +120,38 @@ struct ProgramMockData {
         modules: [
             ProgramModule(
                 id: "1",
-                title: "Java Fundamentals",
-                lessonsTittle: "Core Java Concepts",
-                topics: [
-                    "OOP Principles",
-                    "Collections Framework",
-                    "Exception Handling",
-                    "Multithreading"
+                title: "Modul 1: Java Fundamentals",
+                lessons: [
+                    Lesson(id: "1a", title: "Core Java Concepts", topics: [
+                        "OOP Principles",
+                        "Collections Framework",
+                        "Exception Handling",
+                        "Multithreading"
+                    ])
                 ]
             ),
             ProgramModule(
                 id: "2",
-                title: "Spring Framework",
-                lessonsTittle: "Spring Boot Development",
-                topics: [
-                    "Dependency Injection",
-                    "Spring MVC",
-                    "REST APIs",
-                    "Spring Data JPA"
+                title: "Modul 2: Spring Framework",
+                lessons: [
+                    Lesson(id: "2a", title: "Spring Boot Development", topics: [
+                        "Dependency Injection",
+                        "Spring MVC",
+                        "REST APIs",
+                        "Spring Data JPA"
+                    ])
                 ]
             ),
             ProgramModule(
                 id: "3",
-                title: "Database Design",
-                lessonsTittle: "SQL and NoSQL",
-                topics: [
-                    "PostgreSQL",
-                    "MongoDB",
-                    "Database Optimization",
-                    "Transactions"
+                title: "Modul 3: Database Design",
+                lessons: [
+                    Lesson(id: "3a", title: "SQL and NoSQL", topics: [
+                        "PostgreSQL",
+                        "MongoDB",
+                        "Database Optimization",
+                        "Transactions"
+                    ])
                 ]
             )
         ],
