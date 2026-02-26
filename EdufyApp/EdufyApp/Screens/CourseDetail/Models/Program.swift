@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Program: Identifiable {
+struct Program: Identifiable, Hashable, Decodable {
     let id: String
     let title: String
     let duration: String
@@ -15,7 +15,7 @@ struct Program: Identifiable {
     let status: ProgramStatus
 }
 
-enum ProgramStatus: String {
+enum ProgramStatus: String, Decodable {
     case active = "Active"
     case inactive = "Inactive"
     

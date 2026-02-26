@@ -6,6 +6,9 @@ final class AcademyDetailViewModel: ObservableObject {
     @Published var academy: AcademyDetail?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var selectedProgram: Program? = nil
+
+    
     
     private let academyId: String
     
@@ -30,6 +33,7 @@ final class AcademyDetailViewModel: ObservableObject {
     }
     
     func onTappedProgram(_ program: Program) {
+        selectedProgram = program
         print("Program tapped: \(program.title)")
         
     }

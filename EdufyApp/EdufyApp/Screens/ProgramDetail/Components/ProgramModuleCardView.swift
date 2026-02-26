@@ -1,71 +1,100 @@
-//
-//  ModuleCardView.swift
-//  EdufyApp
-//
-//  Created by Durdana on 23.02.26.
-//
-
-
 import SwiftUI
 
-struct ProgramModuleCard: View {
+struct ModuleCardView: View {
     let module: ProgramModule
     let isExpanded: Bool
     let onTap: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Header Button
-            Button(action: onTap) {
-                HStack {
-                    Text(module.title)
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(.black)
-                    
-                    Spacer()
-                    
-                    Image(systemName: isExpanded ? "chevron.down" : "arrow.up.right")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(.white)
-                        .frame(width: 32, height: 32)
-                        .background(Color.black)
-                        .cornerRadius(16)
-                }
-                .padding(16)
-                .background(Color.white)
-                .cornerRadius(12)
-            }
             
-            // Expanded Content
-            if isExpanded {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Lesson 1: \(module.title)")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(.black)
-                        .padding(.top, 16)
-                    
-                    VStack(alignment: .leading, spacing: 6) {
-                        ForEach(module.topics, id: \.self) { topic in
-                            HStack(alignment: .top, spacing: 8) {
-                                Text("•")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.black.opacity(0.7))
-                                
-                                Text(topic)
-                                    .font(.system(size: 14, weight: .regular))
-                                    .foregroundColor(.black.opacity(0.7))
+            HStack {
+                Text(module.title)
+                    .appFont(.bodyTextMdBold)
+                    .foregroundColor(.blackHigh)
+                
+                Spacer()
+                
+                Image(systemName: "arrow.up.right")
+                    .foregroundColor(.white)
+                    .frame(width: 40, height: 40)
+                    .background(Color.blackHigh)
+                    .clipShape(Circle())
+                    .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                    .animation(.easeInOut(duration: 0.25), value: isExpanded)
+            }
+            .padding(16)
+            .contentShape(Rectangle())
+            .onTapGesture { onTap() }
+            
+            //Expandable content
+            if isExpanded && !module.lessons.isEmpty {
+                Divider()
+                    .padding(.horizontal, 16)
+                
+                VStack(alignment: .leading, spacing: 16) {
+                    ForEach(module.lessons) { lesson in
+                        
+                        Text(lesson.title)
+                            .appFont(.bodyTextMdRegular)
+                            .foregroundColor(.black)
+                        
+                        VStack(alignment: .leading, spacing: 6) {
+                            ForEach(lesson.topics, id: \.self) { topic in
+                                HStack(alignment: .top, spacing: 8) {
+                                    Text("•")
+                                    Text(topic)
+                                        .appFont(.bodyTextSmRegular)
+                                }
+                                .foregroundColor(.black)
                             }
                         }
                     }
                 }
                 .padding(16)
-                .padding(.top, -12)
-                .background(Color.white)
-                .cornerRadius(12)
-                .offset(y: -12)
+                .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
+        .background(Color.moduleBack)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .animation(.easeInOut(duration: 0.25), value: isExpanded)
     }
 }
 
-
+#Preview {
+    ZStack {
+        Color.black.ignoresSafeArea()
+        
+        VStack(spacing: 12) {
+            // Baglı modul
+            ModuleCardView(
+                module: ProgramModule(id: "1", title: "Modul 1: Fundamentals", lessons: [
+                    Lesson(id: "1a", title: "Lesson 1: Introduction to Swift",
+                           topics: ["Xcode setup, Playgrounds",
+                                    "Swift basics: Constants, Variables",
+                                    "Basic Operators"])
+                ]),
+                isExpanded: false,
+                onTap: {}
+            )
+            
+            // Açıq modul
+            ModuleCardView(
+                module: ProgramModule(id: "2", title: "Modul 2: UI development with UIKit", lessons: [
+                    Lesson(id: "2a", title: "Lesson 1: UIKit Basics",
+                           topics: ["UIViewController", "Auto Layout", "UITableView"])
+                ]),
+                isExpanded: true,
+                onTap: {}
+            )
+            
+            // Dərsi olmayan modul
+            ModuleCardView(
+                module: ProgramModule(id: "3", title: "Modul 3: SwiftUI", lessons: []),
+                isExpanded: false,
+                onTap: {}
+            )
+        }
+        .padding(16)
+    }
+}

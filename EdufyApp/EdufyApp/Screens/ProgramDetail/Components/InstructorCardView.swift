@@ -5,128 +5,77 @@ struct InstructorCardView: View {
     let instructor: Instructor
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
+        HStack(alignment: .bottom, spacing: 0) {
             
-            Image("instructorbackground")
-                .resizable()
-                .scaledToFill()
-                .cornerRadius(16)
-                .clipped()
-            
-            Color.black.opacity(0.7)
-                .cornerRadius(16)
-            
-            HStack(alignment: .bottom, spacing: 4) {
+            // Sol: mətn və LinkedIn
+            VStack(alignment: .leading, spacing: 16) {
                 
-                VStack(alignment: .leading, spacing: 16) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(instructor.name)
-                            .appFont(.titleMdSemibold)
-                            .foregroundColor(.white)
-                    }
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(instructor.name)
+                        .appFont(.titleMdSemibold)
+                        .foregroundColor(.white)
                     
                     Text(instructor.bio)
-                        .appFont(.bodyTextSmRegular)
+                        .appFont(.bodyTextSmRegular )
                         .foregroundColor(.white)
                         .lineLimit(6)
-                    
-                    Spacer()
-                    
-                    // LinkedIn button
-                    HStack(spacing: 0) {
-                        Text("Linkedin")
-                            .appFont(.textLRegular)
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.vertical, 12)
-                        
-                        Button(action: {}) {
-                            Image(systemName: "arrow.up.right")
-                                .foregroundColor(.black)
-                                .frame(width: 42, height: 42)
-                                .background(.primaryYellow)
-                                .cornerRadius(22)
-                        }
-                    }
-                    .background(.white)
-                    .cornerRadius(24)
                 }
-                .padding(20)
-                .frame(maxWidth: .infinity, alignment: .leading)
                 
-                // Muellim sekli
-                VStack {
-                    Spacer()
+                Spacer(minLength: 0)
+                
+                // LinkedIn button
+                HStack(spacing: 0) {
+                    Text("Linkedin")
+                        .appFont(.textLRegular)
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
                     
-                    instructorView
+                    Button(action: {}) {
+                        Image(systemName: "arrow.up.right")
+                            .foregroundColor(.black)
+                            .frame(width: 42, height: 42)
+                            .background(Color.primaryYellow)
+                            .clipShape(Circle())
+                    }
+                    .padding(.trailing, 4)
                 }
-                .padding(.leading, 0)
-                .padding(.leading, 20)
-                .padding(.bottom, 0)
+                .background(Color.white)
+                .clipShape(Capsule())
             }
+            .padding(20)
+            .frame(maxHeight: .infinity)
+            
+            // Sağ: şəkil
+            instructorImage
+                .frame(width: 145)
+                .clipped()
         }
         .frame(height: 280)
-        .cornerRadius(20)
+        .background(Color.instructorCard)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        
     }
     
-    
-    
     @ViewBuilder
-    private var instructorView: some View {
-        if let url = URL(string: instructor.imageUrl!)
-        {
+    private var instructorImage: some View {
+        if let urlString = instructor.imageUrl,
+           let url = URL(string: urlString) {
             KFImage(url)
                 .placeholder {
                     Image("instructor_image")
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 145, height: 250)
-                    
-                    //                    ProgressView()
-                    //                        .frame(width: 145, height: 250)
-                    
                 }
                 .resizable()
                 .scaledToFill()
-                .frame(width: 145, height: 250)
-                .clipped()
         } else {
-            Image(systemName: "person.fill")
+            Image("instructor_image")
+                .resizable()
                 .scaledToFill()
-                .frame(width: 145, height: 250)
-                .clipped()
         }
-        
     }
-    
-    //    private var instructorView: some View {
-    //        if let url = URL(string: instructor.imageUrl)
-    //        {
-    //            AsyncImage(url: url) { phase in
-    //                switch phase {
-    //                case .success(let image):
-    //                    image
-    //                        .resizable()
-    //                        .scaledToFill()
-    //                        .frame(width: 145, height: 250)
-    //                        .clipped()
-    //                default:
-    //                    Image(systemName: "person.fill")
-    //                        .scaledToFill()
-    //                        .frame(width: 145, height: 250)
-    //                        .clipped()
-    //                }
-    //            }
-    //
-    //        } else {
-    //            Image(systemName: "person.fill")
-    //                .scaledToFill()
-    //                .frame(width: 145, height: 250)
-    //                .clipped()
-    //        }
-    //    }
 }
-
 
 
 #Preview {
