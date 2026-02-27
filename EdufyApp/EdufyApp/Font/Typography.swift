@@ -32,10 +32,12 @@ enum TextStyle {
     case headingMdSemibold
     case bodyTextMdRegular
     case bodyTextSmMedium
+    case bodyTextMdSemibold
     case bodyTextMdBold
     case bodyTextSmRegular
     case textLRegular
     case textMdMedium
+    case textMdRegular
     
     
     var textConfigure: FontStyle {
@@ -68,6 +70,8 @@ enum TextStyle {
             
         case .bodyTextMdRegular:
             return FontStyle(size: 16, weight: .regular, linespacing: 24)
+        case .bodyTextMdSemibold:
+            return FontStyle(size: 16, weight: .semibold, linespacing: 24)
         case .bodyTextMdBold:
             return FontStyle(size: 16, weight: .bold, linespacing: 24)
             
@@ -84,6 +88,9 @@ enum TextStyle {
             
         case .textMdMedium:
             return FontStyle(size: 13, weight: .medium, linespacing: 18)
+            
+        case .textMdRegular:
+            return FontStyle(size: 13, weight: .regular, linespacing: 18)
         }
     }
 }
