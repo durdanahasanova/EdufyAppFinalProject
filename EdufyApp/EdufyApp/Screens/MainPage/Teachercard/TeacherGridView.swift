@@ -9,12 +9,13 @@ import SwiftUI
 
 struct TeacherGridView: View {
     
-  @StateObject private var viewModel = TeacherViewModel()
+    @StateObject private var viewModel = TeacherViewModel()
+    @State private var selectedTeacherId : String?
     
     private let columns = [
-            GridItem(.flexible(), spacing: 16),
-            GridItem(.flexible(), spacing: 16)
-        ]
+        GridItem(.flexible(), spacing: 16),
+        GridItem(.flexible(), spacing: 16)
+    ]
     
     var body: some View {
         
@@ -33,13 +34,19 @@ struct TeacherGridView: View {
                                     teacherName: teacher.teacherName,
                                     subject: teacher.subject,
                                     onTapDetails:
-                                        { print("LOG: Clicked on \(teacher.teacherName)")}
-                                    )
-                                    
+                                        {
+                            selectedTeacherId = teacher.id
+                            print("LOG: Clicked on \(teacher.teacherName)")}
+                        )
+                        
                         
                     }
                 }
             }
+                
+                }
+        .navigationDestination(item: $selectedTeacherId) { teacherId in
+            TeacherDetailView(viewModel: TeacherDetailViewModel(teacherId: teacherId))
         }
         //.padding(.horizontal, 16)
         .task {
