@@ -26,7 +26,7 @@ struct MainPageView: View {
                         }
                         
                         VStack(alignment: .leading, spacing: 16) {
-                            Text("Kurslar")
+                            Text("Muellimler")
                                 .appFont(.titleSmBold)
                                 .foregroundStyle(.whiteHigh)
                             TeacherGridView()
