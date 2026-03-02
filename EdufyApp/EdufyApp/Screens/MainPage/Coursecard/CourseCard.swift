@@ -27,6 +27,7 @@ struct CourseCard: View {
                         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     
                     Text(course.title)
+                        .multilineTextAlignment(.leading)
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(.black)
                         .lineLimit(2)

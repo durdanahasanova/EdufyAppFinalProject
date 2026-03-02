@@ -3,6 +3,9 @@
 import SwiftUI
 
 struct MainPageView: View {
+    
+    @StateObject private var viewModel = MainPageViewModel()
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -13,10 +16,11 @@ struct MainPageView: View {
                     
                     VStack(alignment: .leading, spacing: 28) {
                         
-                        Text("Salam \nDurdana Hasan!")
+                        Text("Salam \n\(viewModel.userName)!")
                             .appFont(.titleLSemibold)
                             .foregroundStyle(.whiteHigh)
                         
+                        //MARK: -Kurslar
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Kurslar")
                                 .appFont(.titleSmBold)
@@ -25,6 +29,7 @@ struct MainPageView: View {
                             CourseGridView()
                         }
                         
+                        //MARK: -Muellimler
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Muellimler")
                                 .appFont(.titleSmBold)
@@ -37,6 +42,9 @@ struct MainPageView: View {
                 .padding()
                 
             }
+        }
+        .task {
+            await viewModel.fetchUserData()
         }
     }
     
