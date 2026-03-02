@@ -27,7 +27,7 @@ struct RegisterView: View {
                                 text: $viewModel.fullName,
                                 error: viewModel.fullNameError
                             )
-                            .onChange(of: viewModel.fullName) { _ in
+                            .onChange(of: viewModel.fullName) { oldValue, newValue in
                                 viewModel.touchFullName = true
                             }
                             
@@ -37,7 +37,7 @@ struct RegisterView: View {
                                 text: $viewModel.email,
                                 error: viewModel.emailError
                             )
-                            .onChange(of: viewModel.email) { _ in
+                            .onChange(of: viewModel.email) { oldValue, newValue in
                                 viewModel.touchEmail = true
                             }
                             
@@ -48,7 +48,7 @@ struct RegisterView: View {
                                 error: viewModel.passwordError,
                                 isSecure: true
                             )
-                            .onChange(of: viewModel.password) { _ in
+                            .onChange(of: viewModel.password) { oldValue, newValue in
                                 viewModel.touchPassword = true
                             }
                         }
@@ -79,8 +79,8 @@ struct RegisterView: View {
                 .padding(.horizontal, 16)
             }
         }
-        .onChange(of: viewModel.registerSuccess) { success in
-            if success {
+        .onChange(of: viewModel.registerSuccess) { oldValue, newValue in
+            if newValue {
                 isLoggedIn = true
             }
         }

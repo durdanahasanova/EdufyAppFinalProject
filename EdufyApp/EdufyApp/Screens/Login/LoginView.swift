@@ -25,7 +25,7 @@ struct LoginView: View {
                             text: $viewModel.email,
                             error: viewModel.emailError
                         )
-                        .onChange(of: viewModel.email) { _ in
+                        .onChange(of: viewModel.email) { oldValue, newValue in
                             viewModel.touchEmail = true
                         }
 
@@ -36,7 +36,7 @@ struct LoginView: View {
                             error: viewModel.passwordError,
                             isSecure: true
                         )
-                        .onChange(of: viewModel.password) { _ in
+                        .onChange(of: viewModel.password) { oldValue, newValue in
                             viewModel.touchPassword = true
                         }
                     }
@@ -79,8 +79,8 @@ struct LoginView: View {
                 .padding(.top, 80)
                 .padding(.horizontal, 16)
                 
-                .onChange(of: viewModel.loginSuccess) { success in
-                    if success {
+                .onChange(of: viewModel.loginSuccess) { oldValue, newValue in
+                    if newValue {
                         isLoggedIn = true
                     }
                 }

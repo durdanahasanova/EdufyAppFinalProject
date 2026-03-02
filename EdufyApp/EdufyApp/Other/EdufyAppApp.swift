@@ -23,7 +23,7 @@ struct EdufyAppApp: App {
                 } else if !isLoggedIn {
                     LoginView(isLoggedIn: $isLoggedIn)
                 } else {
-                    MainTabView()
+                    MainTabView(isLoggedIn: $isLoggedIn)
                 }
                 
                 

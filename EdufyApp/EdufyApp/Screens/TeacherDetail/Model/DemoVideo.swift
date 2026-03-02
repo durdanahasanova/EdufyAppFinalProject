@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DemoVideo: Identifiable, Decodable {
+struct DemoVideo: Identifiable, Decodable , Hashable{
     let id: String
     let title: String
     let thumbnailUrl: String?
