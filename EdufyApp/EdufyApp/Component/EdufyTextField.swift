@@ -29,6 +29,8 @@ struct EdufyTextField: View {
                     TextField(placeholder, text: $text)
                 }
             }
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled(true)
             .appFont(.bodyTextMdRegular)
             .foregroundStyle(.blackHigh)
             .padding(16)

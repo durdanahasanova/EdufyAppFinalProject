@@ -13,6 +13,8 @@ import Foundation
 @MainActor
 final class RegisterViewModel: ObservableObject {
     
+    private let networkService: NetworkService = DefaultNetworkService()
+    
     // Inputs
     @Published var fullName: String = "" { didSet { validate() } }
     @Published var email: String = ""    { didSet { validate() } }
@@ -28,6 +30,12 @@ final class RegisterViewModel: ObservableObject {
     @Published var emailError: String? = nil
     @Published var passwordError: String? = nil
     
+    //API
+    @Published var isLoading = false
+    @Published var apiError: String? = nil
+    @Published var registerSuccess = false
+    @Published var showAlert = false
+    
     
     var isActiveInput: Bool {
         isValidFullName && isValidEmail && isValidPassword
@@ -41,7 +49,13 @@ final class RegisterViewModel: ObservableObject {
         
         validate()
         guard isActiveInput else { return }
-        print("Register user: \(fullName), \(email)")
+        
+        Task {
+            await performRegister()
+            print("Register user: \(fullName), \(email)")
+        }
+        
+        
     }
     
     private var isValidFullName: Bool {
@@ -55,7 +69,12 @@ final class RegisterViewModel: ObservableObject {
     }
     
     private var isValidPassword: Bool {
-        password.count >= 8
+        let password = password
+        let hasMinLength = password.count >= 8
+        let hasUppercase = password.range(of: "[A-Z]", options: .regularExpression) != nil
+        let hasLowercase = password.range(of: "[a-z]", options: .regularExpression) != nil
+        let hasSpecialChar = password.range(of: "[^A-Za-z0-9]", options: .regularExpression) != nil
+        return hasMinLength && hasUppercase && hasLowercase && hasSpecialChar
     }
     
     private func validate() {
@@ -84,14 +103,61 @@ final class RegisterViewModel: ObservableObject {
         if touchPassword {
             if password.isEmpty {
                 passwordError = "Şifrə boş ola bilməz"
-            } else if password.count < 6 {
-                passwordError = "Şifrə ən az 6 simvol olmalıdır"
+            } else if password.count < 8 {
+                passwordError = "Şifrə ən az 8 simvol olmalıdır"
+            } else if password.range(of: "[A-Z]", options: .regularExpression) == nil {
+                passwordError = "Ən az 1 böyük hərf olmalıdır"
+            } else if password.range(of: "[a-z]", options: .regularExpression) == nil {
+                passwordError = "Ən az 1 kiçik hərf olmalıdır"
+            } else if password.range(of: "[^A-Za-z0-9]", options: .regularExpression) == nil {
+                passwordError = "Ən az 1 xüsusi simvol olmalıdır (@, #, ! və s.)"
             } else {
                 passwordError = nil
             }
-        }
-        else {
+        } else {
             passwordError = nil
+        }
+    }
+    
+    private func performRegister() async {
+        isLoading = true
+        apiError = nil
+        
+        defer {
+            isLoading = false
+        }
+        
+        let request = RegisterRequest(fullName: fullName, email: email, password: password)
+        do {
+            let response: APIResponse<LoginData> = try await networkService.request(AuthEndpoint.register(request))
+            
+            if response.success, let data = response.data {
+                TokenManager.shared.saveTokens(access: data.accessToken, refresh: data.refreshToken)
+                registerSuccess = true
+                print("LOG: Register token ugurla yaradildi")
+            } else {
+                apiError = response.message ?? "LOG: Qeydiyyat ugursuz oldu"
+                showAlert = true
+            }
+            
+            
+        } catch let error as NetworkError {
+            if case .serverError(let statusCode) = error {
+                if statusCode == 409 {
+                    apiError = "Bu email artıq mövcuddur"
+                } else if statusCode == 400 {
+                    apiError = "Məlumatlar tələblərə uyğun deyil"
+                } else {
+                    apiError = "Xəta baş verdi"
+                }
+            } else {
+                apiError = "İnternet bağlantınızı yoxlayın."
+            }
+            showAlert = true 
+        }
+        catch {
+            apiError = "Xəta baş verdi."
+            showAlert = true
         }
     }
 }
