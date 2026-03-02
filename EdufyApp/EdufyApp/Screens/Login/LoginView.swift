@@ -40,16 +40,29 @@ struct LoginView: View {
                             viewModel.touchPassword = true
                         }
                     }
+                    
+//                    if let error = viewModel.apiError {
+//                        Text(error)
+//                            .font(.system(size: 14))
+//                            .foregroundStyle(.red)
+//                            .multilineTextAlignment(.center)
+//                    }
 
-                    Buttons(
-                        title: "Daxil ol",
-                        style: viewModel.isActiveInput ? .primaryLargeButton : .disableLargeButton,
-                        action: {
-                            viewModel.login()
-                            isLoggedIn = true
-                        }
-                    )
-                    .disabled(!viewModel.isActiveInput)
+                    
+                    if viewModel.isLoading {
+                      ProgressView()
+                            .tint(.whiteHigh)
+                    } else {
+                        Buttons(
+                            title: "Daxil ol",
+                            style: viewModel.isActiveInput ? .primaryLargeButton : .disableLargeButton,
+                            action: {
+                                viewModel.login()
+                                    //isLoggedIn = true
+                            }
+                        )
+                        .disabled(!viewModel.isActiveInput)
+                    }
 
                     Spacer()
 
@@ -65,11 +78,18 @@ struct LoginView: View {
                 }
                 .padding(.top, 80)
                 .padding(.horizontal, 16)
+                
+                .onChange(of: viewModel.loginSuccess) { success in
+                    if success {
+                        isLoggedIn = true
+                    }
+                }
+                .alert("Xəta", isPresented: $viewModel.showAlert) {
+                    Button("Bağla", role: .cancel) {}
+                } message: {
+                        Text(viewModel.apiError ?? "")
+                    }
             }
         }
     }
 }
-
-//#Preview {
-//    LoginView()
-//}

@@ -1,26 +1,26 @@
 import SwiftUI
 
 struct RegisterView: View {
-
+    
     @StateObject private var viewModel = RegisterViewModel()
     @Binding var isLoggedIn: Bool
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea()
-
+                
                 VStack(spacing: 32) {
                     Text("Edufy-a \nxoş gəldiniz!")
                         .appFont(.headerBold)
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.whiteHigh)
-
+                    
                     VStack(alignment: .leading, spacing: 48) {
-
+                        
                         // MARK: - Field
                         VStack(alignment: .leading, spacing: 20) {
-
+                            
                             EdufyTextField(
                                 tittle: "Tam adınız",
                                 placeholder: "Ad soyad daxil et",
@@ -30,7 +30,7 @@ struct RegisterView: View {
                             .onChange(of: viewModel.fullName) { _ in
                                 viewModel.touchFullName = true
                             }
-
+                            
                             EdufyTextField(
                                 tittle: "Email",
                                 placeholder: "Enter email",
@@ -40,7 +40,7 @@ struct RegisterView: View {
                             .onChange(of: viewModel.email) { _ in
                                 viewModel.touchEmail = true
                             }
-
+                            
                             EdufyTextField(
                                 tittle: "Password",
                                 placeholder: "Enter password",
@@ -52,7 +52,7 @@ struct RegisterView: View {
                                 viewModel.touchPassword = true
                             }
                         }
-
+                        
                         // MARK: - Register button
                         Buttons(
                             title: "Qeydiyyatdan keç",
@@ -61,14 +61,14 @@ struct RegisterView: View {
                         )
                         .disabled(!viewModel.isActiveInput)
                     }
-
+                    
                     Spacer()
-
+                    
                     VStack(spacing: 24) {
                         Text("Hesabınız var?")
                             .foregroundStyle(.whiteHigh)
                             .appFont(.bodyTextMdRegular)
-
+                        
                         NavigationLink(destination: LoginView(isLoggedIn: $isLoggedIn)) {
                             
                             Buttons(title: "Daxil ol", style: .secondaryLargeButton)
@@ -79,6 +79,16 @@ struct RegisterView: View {
                 .padding(.horizontal, 16)
             }
         }
+        .onChange(of: viewModel.registerSuccess) { success in
+            if success {
+                isLoggedIn = true
+            }
+        }
+        .alert("Xeta", isPresented: $viewModel.showAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+                Text(viewModel.apiError ?? "")
+            }
     }
 }
 
