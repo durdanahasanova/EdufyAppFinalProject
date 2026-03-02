@@ -11,6 +11,7 @@ struct TeacherDetailView: View {
     
     @StateObject var viewModel: TeacherDetailViewModel
     @Environment(\.dismiss) private var dismiss
+    @State private var selectedVideo: DemoVideo?
     
     private let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -129,6 +130,7 @@ struct TeacherDetailView: View {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(viewModel.demoVideos) { video in
                                 DemoVideoCard(video: video) {
+                                    self.selectedVideo = video
                                     print("LOG: Video tapped - \(video.title)")
                                 }
                             }
@@ -138,6 +140,9 @@ struct TeacherDetailView: View {
                 .padding(.horizontal, 16)
                 .padding(.bottom, 32)
             }
+        }
+        .navigationDestination(item: $selectedVideo) { video in
+            VideoPlayerView(video: video)
         }
         .navigationBarBackButtonHidden(true)
         .task {

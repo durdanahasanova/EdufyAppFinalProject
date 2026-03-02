@@ -64,11 +64,11 @@ struct VideoPlayerView: View {
                             
                             HStack(spacing: 4) {
                                 Image(systemName: "clock")
-                                    .font(.system(size: 12))
+                                    .font(.system(size: 14))
                                 Text(video.duration)
-                                    .font(.system(size: 13))
+                                    .font(.system(size: 15))
                             }
-                            .foregroundColor(.white.opacity(0.6))
+                            .foregroundColor(.whiteMedium)
                         }
                         .padding(.top, 16)
                         
@@ -93,6 +93,7 @@ struct VideoPlayerView: View {
                             
                             Spacer()
                         }
+                        
                         
                         Divider()
                             .background(.white.opacity(0.2))
