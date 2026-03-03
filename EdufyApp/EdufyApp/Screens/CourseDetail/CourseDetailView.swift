@@ -7,8 +7,7 @@ struct CourseDetailView: View {
     
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
+            Color.background.ignoresSafeArea()
             
             if viewModel.isLoading {
                 ProgressView()

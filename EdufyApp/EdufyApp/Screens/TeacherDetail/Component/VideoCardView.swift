@@ -121,7 +121,7 @@ struct DemoVideoCard: View {
                     thumbnailUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
                     videoUrl: "https://example.com/video1",
                     duration: "00:21",
-                    teacherName: "Durdana Hasan"
+                    teacherName: "Durdana Hasan", teacherId: "1"
                 ),
                 onTap: {}
             )
@@ -132,7 +132,7 @@ struct DemoVideoCard: View {
                     thumbnailUrl: nil,
                     videoUrl: "https://example.com/video2",
                     duration: "00:21",
-                    teacherName: "Sever Jafarli"
+                    teacherName: "Sever Jafarli", teacherId: "2"
                 ),
                 onTap: {}
             )
@@ -144,7 +144,7 @@ struct DemoVideoCard: View {
                     thumbnailUrl: nil,
                     videoUrl: "https://example.com/video2",
                     duration: "00:21",
-                    teacherName: "Sever Jafarli"
+                    teacherName: "Sever Jafarli", teacherId: "3"
                 ),
                 onTap: {}
             )

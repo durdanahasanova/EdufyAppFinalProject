@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserData: Decodable {
-    let id: String
+    let userId: String
     let email: String
     //let username: String
     let roles: [String]

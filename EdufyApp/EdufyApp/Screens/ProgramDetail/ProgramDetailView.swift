@@ -7,8 +7,7 @@ struct ProgramDetailView: View {
     var body: some View {
         
         ZStack {
-            Color.black
-                .ignoresSafeArea()
+            Color.background.ignoresSafeArea()
             
             ScrollView{
                 VStack(alignment: .leading, spacing: 24) {

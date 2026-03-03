@@ -11,14 +11,14 @@ import AVKit
 struct VideoPlayerView: View {
     
     let video: DemoVideo
+    @State private var navigateToTeacher = false
     
     @Environment(\.dismiss) private var dismiss
     @State private var player: AVPlayer?
     
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
+            Color.background.ignoresSafeArea()
             
             VStack(spacing: 0) {
                 
@@ -43,12 +43,12 @@ struct VideoPlayerView: View {
                     } label: {
                         Image(systemName: "arrow.left")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundColor(.blackHigh)
                             .frame(width: 36, height: 36)
-                            .background(.black.opacity(0.5))
+                           
                             .clipShape(Circle())
                     }
-                    .padding(.leading, 16)
+                    //.padding(.leading, 16)
                     .padding(.top, 8)
                 }
                 
@@ -76,23 +76,34 @@ struct VideoPlayerView: View {
                             .background(.white.opacity(0.2))
                         
                         // Teacher Info
-                        HStack(spacing: 12) {
-                            Image(systemName: "person.circle.fill")
-                                .font(.system(size: 40))
-                                .foregroundColor(.gray)
-                            
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(video.teacherName)
-                                    .appFont(.bodyTextMdSemibold)
-                                    .foregroundStyle(.whiteHigh)
+                        Button {
+                            player?.pause()
+                            navigateToTeacher = true
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: "person.circle.fill")
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.gray)
                                 
-                                Text("Müəllim")
-                                    .appFont(.textMdRegular)
-                                    .foregroundStyle(.white.opacity(0.5))
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(video.teacherName)
+                                        .appFont(.bodyTextMdSemibold)
+                                        .foregroundStyle(.whiteHigh)
+                                    
+                                    Text("Müəllim")
+                                        .appFont(.textMdRegular)
+                                        .foregroundStyle(.white.opacity(0.5))
+                                }
+                                
+                                Spacer()
                             }
-                            
-                            Spacer()
                         }
+                        .navigationDestination(isPresented: $navigateToTeacher) {
+                            if let teacherId = video.teacherId {
+                               TeacherDetailView(viewModel: TeacherDetailViewModel(teacherId: teacherId))
+                            }
+                        }
+                        
                         
                         
                         Divider()
@@ -131,7 +142,7 @@ struct VideoPlayerView: View {
                 thumbnailUrl: nil,
                 videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                 duration: "00:21",
-                teacherName: "Durdana Hasan"
+                teacherName: "Durdana Hasan", teacherId: "1"
             )
         )
     }

@@ -25,7 +25,7 @@ struct TeacherMockData {
                 thumbnailUrl: nil,
                 videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                 duration: "00:21",
-                teacherName: "Durdana Hasan"
+                teacherName: "Durdana Hasan", teacherId: "1"
             ),
             DemoVideo(
                 id: "2",
@@ -33,7 +33,7 @@ struct TeacherMockData {
                 thumbnailUrl: nil,
                 videoUrl: "https://example.com/video2",
                 duration: "00:21",
-                teacherName: "Sever Jafarli"
+                teacherName: "Sever Jafarli", teacherId: "2"
             )
         ]
     )
