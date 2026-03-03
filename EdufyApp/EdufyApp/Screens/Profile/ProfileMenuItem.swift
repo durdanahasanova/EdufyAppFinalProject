@@ -15,11 +15,11 @@ struct ProfileMenuItem: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 16) {
-                Image(systemName: icon)
+                Image(icon)
                     .font(.system(size: 20))
                     .foregroundStyle(.blue)
                     .frame(width: 44, height: 44)
-                    .background(Color.blue.opacity(0.1))
+                    .background(.blueBackground)
                     .cornerRadius(16)
                 
                 Text(title)

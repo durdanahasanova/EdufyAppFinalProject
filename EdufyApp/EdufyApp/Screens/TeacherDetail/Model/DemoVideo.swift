@@ -7,18 +7,20 @@
 
 import Foundation
 
-struct DemoVideo: Identifiable, Decodable , Hashable{
+struct DemoVideo: Identifiable, Codable , Hashable{
     let id: String
     let title: String
     let thumbnailUrl: String?
     let videoUrl: String
     let duration: String
     let teacherName: String
+    let teacherId: String?
     
     enum CodingKeys: String, CodingKey {
         case id, title, duration
         case thumbnailUrl = "thumbnail_url"
         case videoUrl = "video_url"
         case teacherName = "teacher_name"
+        case teacherId = "teacher_id"
     }
 }

@@ -1,24 +1,24 @@
 import SwiftUI
 
 struct LoginView: View {
-
+    
     @StateObject private var viewModel = LoginViewModel()
     @Binding var isLoggedIn: Bool
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea()
-
+                
                 VStack(spacing: 32) {
-
+                    
                     Text("Edufy-a \nxoş gəldiniz!")
                         .appFont(.headerBold)
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.whiteHigh)
-
+                    
                     VStack(alignment: .leading, spacing: 40) {
-
+                        
                         EdufyTextField(
                             tittle: "Email",
                             placeholder: "Enter email",
@@ -28,7 +28,7 @@ struct LoginView: View {
                         .onChange(of: viewModel.email) { oldValue, newValue in
                             viewModel.touchEmail = true
                         }
-
+                        
                         EdufyTextField(
                             tittle: "Password",
                             placeholder: "Enter password",
@@ -39,18 +39,30 @@ struct LoginView: View {
                         .onChange(of: viewModel.password) { oldValue, newValue in
                             viewModel.touchPassword = true
                         }
+                        
+                        //MARK: - Forgot password
+                        NavigationLink {
+                            ForgotPasswordView()
+                        } label: {
+                            Text("Forgot password")
+                                .appFont(.bodyTextMdRegular)
+                                .foregroundStyle(.whiteHigh)
+                        }
+                        
                     }
                     
-//                    if let error = viewModel.apiError {
-//                        Text(error)
-//                            .font(.system(size: 14))
-//                            .foregroundStyle(.red)
-//                            .multilineTextAlignment(.center)
-//                    }
-
+                    
+                    
+                    //                    if let error = viewModel.apiError {
+                    //                        Text(error)
+                    //                            .font(.system(size: 14))
+                    //                            .foregroundStyle(.red)
+                    //                            .multilineTextAlignment(.center)
+                    //                    }
+                    
                     
                     if viewModel.isLoading {
-                      ProgressView()
+                        ProgressView()
                             .tint(.whiteHigh)
                     } else {
                         Buttons(
@@ -58,19 +70,19 @@ struct LoginView: View {
                             style: viewModel.isActiveInput ? .primaryLargeButton : .disableLargeButton,
                             action: {
                                 viewModel.login()
-                                    //isLoggedIn = true
+                                //isLoggedIn = true
                             }
                         )
                         .disabled(!viewModel.isActiveInput)
                     }
-
+                    
                     Spacer()
-
+                    
                     VStack(spacing: 24) {
                         Text("Hesabınız yoxdur?")
                             .foregroundStyle(.whiteHigh)
                             .appFont(.bodyTextMdRegular)
-
+                        
                         NavigationLink(destination: RegisterView(isLoggedIn: $isLoggedIn)) {
                             Buttons(title: "Qeydiyyatdan keç", style: .secondaryLargeButton)
                         }
@@ -87,8 +99,8 @@ struct LoginView: View {
                 .alert("Xəta", isPresented: $viewModel.showAlert) {
                     Button("Bağla", role: .cancel) {}
                 } message: {
-                        Text(viewModel.apiError ?? "")
-                    }
+                    Text(viewModel.apiError ?? "")
+                }
             }
         }
     }

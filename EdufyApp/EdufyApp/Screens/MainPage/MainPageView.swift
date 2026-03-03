@@ -9,8 +9,7 @@ struct MainPageView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.black
-                    .ignoresSafeArea()
+                Color.background.ignoresSafeArea()
                 
                 ScrollView{
                     
