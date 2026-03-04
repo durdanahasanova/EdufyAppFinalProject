@@ -8,7 +8,7 @@
 import Foundation
 
 struct Program: Identifiable, Hashable, Decodable {
-    let id: String
+    let id: Int
     let title: String
     let duration: String
     let imageName: String

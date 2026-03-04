@@ -65,6 +65,8 @@ final class DefaultNetworkService: NetworkService {
                     
                     let statusCode = httpResponse.statusCode
                     
+                    
+                    
                     guard (200...299).contains(statusCode) else {
                         return completion(.failure(.serverError(statusCode: statusCode)))
                     }

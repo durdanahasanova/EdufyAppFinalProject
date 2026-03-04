@@ -29,14 +29,14 @@ struct TeacherGridView: View {
                 
                 LazyVGrid(columns: columns) {
                     ForEach(viewModel.teachers) { teacher in
-                        TeacherCard(teacherPhoto: teacher.teacherPhoto,
+                        TeacherCard(teacherPhoto: teacher.photoUrl,
                                     lessonPrice: teacher.price,
-                                    teacherName: teacher.teacherName,
+                                    teacherName: teacher.fullName,
                                     subject: teacher.subject,
                                     onTapDetails:
                                         {
                             selectedTeacherId = teacher.id
-                            print("LOG: Clicked on \(teacher.teacherName)")}
+                            print("LOG: Clicked on \(teacher.fullName)")}
                         )
                         
                         

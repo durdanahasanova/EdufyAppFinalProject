@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct EdufyAppApp: App {
     @State private var showOnboarding = true
-    @State private var isLoggedIn = false
+    @State private var isLoggedIn = TokenManager.shared.isLoggedIn
 
     var body: some Scene {
         WindowGroup {
