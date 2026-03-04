@@ -12,12 +12,12 @@ enum AuthEndpoint: Endpoint {
     case login(LoginRequest)
     case register(RegisterRequest)
     case refresh(String)
-    case lagout(String)
+    case logout(String)
     case me
     
-    var baseURL: String {
-        "http://64.226.99.9:8080"
-    }
+//    var baseURL: String {
+//        "http://64.226.99.9:8080"
+//    }
     
     var path: String {
         switch self {
@@ -28,7 +28,7 @@ enum AuthEndpoint: Endpoint {
             return "/api/auth/register"
         case .refresh:
             return "/api/auth/refresh"
-        case .lagout:
+        case .logout:
             return "/api/auth/logout"
         case .me:
             return "/api/auth/me"
@@ -37,7 +37,7 @@ enum AuthEndpoint: Endpoint {
     
     var method: HttpMethod {
         switch self {
-        case .login, .register, .refresh, .lagout:
+        case .login, .register, .refresh, .logout:
             return .post
         case .me:
             return .get
@@ -47,7 +47,7 @@ enum AuthEndpoint: Endpoint {
     var headers: [String : String]? {
         var headers = ["Content-Type": "application/json"]
         switch self {
-        case .lagout, .me:
+        case .logout, .me:
             if let token = TokenManager.shared.accessToken {
                 headers["Authorization"] = "Bearer \(token)"
             }
@@ -71,7 +71,7 @@ enum AuthEndpoint: Endpoint {
         case .refresh(let token):
             return RefreshRequest(refreshToken: token)
             
-        case .lagout(let token):
+        case .logout(let token):
             return RefreshRequest(refreshToken: token)
             
         case .me:
@@ -79,9 +79,7 @@ enum AuthEndpoint: Endpoint {
         }
         
     }
-    
-   
-    
-    
-    
+ 
 }
+
+

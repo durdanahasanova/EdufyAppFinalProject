@@ -8,17 +8,11 @@
 import Foundation
 
 struct ApplicationRequest: Encodable {
-    let programId: String
+    let programId: Int
     let firstName: String
     let lastName: String
     let phone: String
     
-    enum CodingKeys: String, CodingKey {
-            case programId = "program_id"
-            case firstName = "first_name"
-            case lastName = "last_name"
-            case phone
-        }
 }
 
 struct ApplicationResponse: Decodable {

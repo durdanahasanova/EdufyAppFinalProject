@@ -10,6 +10,6 @@ import Foundation
 struct Course: Identifiable, Decodable {
     let id: String
     let title: String
-    let courseCount: Int
+    let programCount: Int
     let logoURL: String
 }

@@ -37,7 +37,7 @@ struct CourseCard: View {
                 
                 Spacer()
                 
-                Text("\(course.courseCount) courses")
+                Text("\(course.programCount) courses")
                     .font(.system(size: 14, weight: .bold))
                     .foregroundColor(.whiteHigh)
                     .padding(.horizontal, 16)

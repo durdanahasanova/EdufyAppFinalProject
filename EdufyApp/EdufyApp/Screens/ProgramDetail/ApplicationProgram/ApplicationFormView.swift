@@ -120,7 +120,7 @@ struct ApplicationFormView: View {
 #Preview {
     NavigationStack {
         ApplicationFormView(
-            viewModel: ProgramDetailViewModel(programId: "1")
+            viewModel: ProgramDetailViewModel(programId: 1)
         )
     }
 }

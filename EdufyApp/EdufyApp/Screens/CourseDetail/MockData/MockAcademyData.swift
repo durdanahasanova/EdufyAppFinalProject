@@ -31,35 +31,35 @@ struct MockAcademyData {
     
     static let samplePrograms: [Program] = [
         Program(
-            id: "p1",
+            id: 1,
             title: "Marketing Automation &\nReporting",
             duration: "4 ay",
             imageName: "examplephoto",
             status: .active
         ),
         Program(
-            id: "p2",
+            id: 2,
             title: "iOS Developer",
             duration: "4 ay",
             imageName: "examplephoto",
             status: .active
         ),
         Program(
-            id: "p3",
+            id: 3,
             title: "Backend Java Developer",
             duration: "4 ay",
             imageName: "examplephoto",
             status: .active
         ),
         Program(
-            id: "p4",
+            id: 4,
             title: "Backend Java Developer",
             duration: "4 ay",
             imageName: "person",
             status: .active
         ),
         Program(
-            id: "p5",
+            id: 5,
             title: "Backend Java Developer",
             duration: "4 ay",
             imageName: "person",
