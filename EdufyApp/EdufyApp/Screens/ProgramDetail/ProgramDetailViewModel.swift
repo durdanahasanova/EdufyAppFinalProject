@@ -40,7 +40,7 @@ class ProgramDetailViewModel: ObservableObject {
             isLoading = false
         }
 
-        programDetail = ProgramMockData.iOSProgram
+//        programDetail = ProgramMockData.iOSProgram
 
         do {
             let response: APIResponse<ProgramDetail> =
@@ -51,6 +51,7 @@ class ProgramDetailViewModel: ObservableObject {
             if response.success, let data = response.data {
                 programDetail = data
                 print("LOG: Program detail API-dan ugurla geldi")
+                return
             }
         } catch {
             print(

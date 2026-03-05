@@ -47,20 +47,20 @@ struct ProfileView: View {
                             
                             Spacer()
                             
-                            Circle()
-                                .fill(Color.gray.opacity(0.3))
-                                .frame(width: 70, height: 70)
-                                .overlay(
-                                    Image(systemName: "person.fill")
-                                        .font(.system(size: 30))
-                                        .foregroundStyle(.gray)
-                                )
+//                            Circle()
+//                                .fill(Color.gray.opacity(0.3))
+//                                .frame(width: 70, height: 70)
+//                                .overlay(
+//                                    Image(systemName: "person.fill")
+//                                        .font(.system(size: 30))
+//                                        .foregroundStyle(.gray)
+//                                )
                         }
                         
-                        HStack(spacing: 12) {
-                            ProfileSmallButton(title: "Editle") {}
-                            ProfileSmallButton(title: "şəkli dəyiş") {}
-                        }
+//                        HStack(spacing: 12) {
+//                            ProfileSmallButton(title: "Editle") {}
+//                            ProfileSmallButton(title: "şəkli dəyiş") {}
+//                        }
                     }
                     .padding(.horizontal, 16)
                     .padding(.vertical, 20)

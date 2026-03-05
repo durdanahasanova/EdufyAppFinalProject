@@ -29,6 +29,7 @@ final class AcademyDetailViewModel: ObservableObject {
             if response.success, let data = response.data {
                 academy = data
                 print("LOG: Academy detail API-dan ugurla geldi")
+                return
             }
         } catch {
             print(

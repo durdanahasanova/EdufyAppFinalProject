@@ -19,10 +19,8 @@ struct MainTabView: View {
                     Image("tab_home")
                     Text("Ana səhifə")
                 }
-            
-            
-            
-            Text("Kəşfet səhifəsi")
+       
+            DiscoverView()
                 .tabItem {
                     Image("tab_explore")
                     Text("Kəşfet")
@@ -30,7 +28,7 @@ struct MainTabView: View {
             
             Text("Sevimlilər səhifəsi")
                 .tabItem {
-                    Image("tab_fav")
+                    Image("tab_heart")
                     Text("Sevimlilər")
                 }
             

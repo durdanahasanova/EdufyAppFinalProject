@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 
+@MainActor
 class TeacherDetailViewModel: ObservableObject {
     @Published var teacherDetail: TeacherDetail?
     @Published var isLoading = false
