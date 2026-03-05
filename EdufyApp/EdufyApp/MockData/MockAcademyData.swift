@@ -12,7 +12,7 @@ struct MockAcademyData {
     static let sampleAcademy = AcademyDetail(
         id: "1",
         name: "ABB\nTech Academy",
-        logoName: "abb_logo",
+        logoName: "https://ui-avatars.com/api/?name=ABB+Academy&size=200&background=FF8B94&color=fff",
         aboutText: """
         ABB Tech Akademiyası proqramlaşdırmanın əsas istiqamətləri üzrə intensiv \
         "bootcamp" proqramları təşkil edir. Bu proqram çərçivəsində namizədlər \

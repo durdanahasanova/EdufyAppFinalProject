@@ -44,55 +44,13 @@ class TeacherViewModel: ObservableObject {
 
     }
 
-    static let mockTeachers: [Teacher] = [
+    static let mockTeachers: [Teacher] = TeacherMockData.all.map { detail in
         Teacher(
-            id: "1",
-            photoUrl: "https://via.placeholder.com/120",
-            fullName: "Durdana Hasanova",
-            subject: "IOS Develooper",
-            price: 120
-        ),
-
-        Teacher(
-            id: "2",
-            photoUrl: "https://via.placeholder.com/120",
-            fullName: "Murad Hasanov",
-            subject: "IOS Develooper",
-            price: 120
-        ),
-
-        Teacher(
-            id: "3",
-            photoUrl: "https://via.placeholder.com/120",
-            fullName: "Durdana Hasanova",
-            subject: "IOS Develooper",
-            price: 120
-        ),
-
-        Teacher(
-            id: "4",
-            photoUrl: "https://via.placeholder.com/120",
-            fullName: "Durdana Hasanova",
-            subject: "IOS Develooper",
-            price: 120
-        ),
-
-        Teacher(
-            id: "5",
-            photoUrl: "https://via.placeholder.com/120",
-            fullName: "Durdana Hasanova",
-            subject: "IOS Develooper",
-            price: 120
-        ),
-
-        Teacher(
-            id: "6",
-            photoUrl: "https://via.placeholder.com/120",
-            fullName: "Durdana Hasanova",
-            subject: "IOS Develooper",
-            price: 120
-        ),
-
-    ]
-
+            id: detail.id,
+            photoUrl: detail.photoUrl ?? "",
+            fullName: detail.name,
+            subject: detail.subject,
+            price: Int(detail.monthlyPrice.replacingOccurrences(of: " AZN", with: "")) ?? 0
+        )
+    }
 }
