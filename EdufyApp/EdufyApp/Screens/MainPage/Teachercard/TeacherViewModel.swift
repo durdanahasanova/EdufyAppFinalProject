@@ -8,6 +8,7 @@
 import Combine
 import SwiftUI
 
+@MainActor
 class TeacherViewModel: ObservableObject {
 
     @Published var teachers: [Teacher] = []
@@ -33,6 +34,7 @@ class TeacherViewModel: ObservableObject {
             {
                 teachers = instructors
                 print("LOG: Teacher API-dan ugurla geldi")
+                return
             }
         } catch {
             print("LOG: Fetch error: \(error), Mock data istifade olundu")

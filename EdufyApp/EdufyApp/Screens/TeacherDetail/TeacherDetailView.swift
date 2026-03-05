@@ -128,10 +128,10 @@ struct TeacherDetailView: View {
                         
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(viewModel.demoVideos) { video in
-                                DemoVideoCard(video: video) {
+                                DemoVideoCard(video: video, onTap: {
                                     self.selectedVideo = video
                                     print("LOG: Video tapped - \(video.title)")
-                                }
+                                }, showFavorite: true)
                             }
                         }
                     }

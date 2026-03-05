@@ -22,7 +22,7 @@ final class MainPageViewModel: ObservableObject {
             if let user = response.data {
                 userName = user.email
                 print("LOG: Username API-dan ugurla geldi")
-
+                return
             }
 
         } catch {
