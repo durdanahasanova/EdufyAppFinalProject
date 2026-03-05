@@ -44,24 +44,7 @@ struct DiscoverView: View {
                         } else {
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(viewModel.videos) { video in
-                                    ZStack(alignment: .topTrailing) {
-                                        DemoVideoCard(video: video) {
-                                            selectedVideo = video
-                                        }
-                                        
-                                        // Favori button
-                                        Button {
-                                            favoritesManager.toggle(video.id)
-                                        } label: {
-                                            Image(systemName: favoritesManager.isFavorite(video.id) ? "heart.fill" : "heart")
-                                                .font(.system(size: 18))
-                                                .foregroundColor(favoritesManager.isFavorite(video.id) ? .white : .white)
-//                                                .padding(10)
-//                                                .background(.black.opacity(0.5))
-//                                                .clipShape(Circle())
-                                        }
-                                        .padding(12)
-                                    }
+                                    DemoVideoCard(video: video, onTap: { selectedVideo = video }, showFavorite: true)
                                 }
                             }
                         }

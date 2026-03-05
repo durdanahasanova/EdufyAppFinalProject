@@ -26,7 +26,7 @@ struct MainTabView: View {
                     Text("Kəşfet")
                 }
             
-            Text("Sevimlilər səhifəsi")
+            FavoritesView()
                 .tabItem {
                     Image("tab_heart")
                     Text("Sevimlilər")

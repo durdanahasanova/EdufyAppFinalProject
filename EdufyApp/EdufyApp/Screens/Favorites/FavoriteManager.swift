@@ -21,7 +21,7 @@ final class FavoritesManager: ObservableObject {
         loadFavorites()
     }
 
-    // MARK: - Toggle (əlavə et / çıxar)
+    // MARK: - Toggle 
     func toggle(_ videoId: String) {
         if favoriteIDs.contains(videoId) {
             favoriteIDs.remove(videoId)

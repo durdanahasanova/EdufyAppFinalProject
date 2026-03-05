@@ -34,7 +34,7 @@ class TeacherDetailViewModel: ObservableObject {
         //
         //        }
         //TODO: API qosmaliyam
-        teacherDetail = TeacherMockData.aysel
+        teacherDetail = TeacherMockData.getTeacher(by: teacherId)
 
     }
 
