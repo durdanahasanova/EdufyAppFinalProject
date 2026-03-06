@@ -18,10 +18,10 @@ struct ProgramInfoView: View {
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Tədris müddəti")
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.whiteHigh)
-                    Text("\(duration) ay")
-                        .font(.system(size: 14, weight: .regular))
+                    Text(duration)
+                        .font(.system(size: 13, weight: .regular))
                         .foregroundColor(.whiteHigh)
                 }
             }
@@ -39,10 +39,10 @@ struct ProgramInfoView: View {
                 
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Qrup")
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.whiteHigh)
-                    Text("\(groupSize) nefer")
-                        .font(.system(size: 14, weight: .regular))
+                    Text(groupSize)
+                        .font(.system(size: 13, weight: .regular))
                         .foregroundColor(.whiteHigh)
                 }
             }

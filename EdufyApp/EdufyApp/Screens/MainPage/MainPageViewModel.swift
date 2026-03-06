@@ -12,24 +12,27 @@ import Foundation
 final class MainPageViewModel: ObservableObject {
     private let networkService: NetworkService = DefaultNetworkService()
     @Published var userName: String = ""
-
+    
     func fetchUserData() async {
-
+        
         do {
-            let response: APIResponse<UserData> =
-                try await networkService.request(AuthEndpoint.me)
-
-            if let user = response.data {
-                userName = user.email
+            let response: APIResponse<HomeResponse> =
+            try await networkService.request(
+                HomeEndpoint.home(popularTake: 4, instructorTake: 4)
+            )
+            
+            if response.success, let user = response.data, let name = user.greetingName {
+                
+                userName = name
                 print("LOG: Username API-dan ugurla geldi")
                 return
             }
-
+            
         } catch {
             print("LOG: User fetch xetasi \(error), Mock Data istifade olunur")
         }
-
+        
         userName = "Istifadeci adi"
-
+        
     }
 }

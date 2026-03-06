@@ -8,13 +8,13 @@
 import Foundation
 
 struct ProgramModule: Identifiable, Decodable {
-    let id: String
-    let title: String
+    let id: Int
+    let name: String
     let lessons: [Lesson]
 }
 
 struct Lesson: Identifiable, Decodable {
-    let id: String
-    let title: String
-    let topics: [String]
+    let id: Int
+    let name: String
+    
 }

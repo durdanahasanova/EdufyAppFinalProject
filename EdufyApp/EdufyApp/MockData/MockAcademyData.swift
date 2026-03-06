@@ -10,10 +10,10 @@ import Foundation
 struct MockAcademyData {
     
     static let sampleAcademy = AcademyDetail(
-        id: "1",
+        id: 1,
         name: "ABB\nTech Academy",
-        logoName: "https://ui-avatars.com/api/?name=ABB+Academy&size=200&background=FF8B94&color=fff",
-        aboutText: """
+        logoUrl: "https://ui-avatars.com/api/?name=ABB+Academy&size=200&background=FF8B94&color=fff",
+        about: """
         ABB Tech Akademiyası proqramlaşdırmanın əsas istiqamətləri üzrə intensiv \
         "bootcamp" proqramları təşkil edir. Bu proqram çərçivəsində namizədlər \
         Akademiyaya 4 seçim mərhələsini keçməklə qəbul olunur, burada IT sahəsində \
@@ -24,46 +24,46 @@ struct MockAcademyData {
         yaradılmasına dəstək verməkdir.
         """,
         programs: samplePrograms,
-        applicationCount: "9000+",
-        studentCount: "1600+",
-        graduatePercentage: "68%"
+        totalApplications: 9000,
+        totalStudents: 1600,
+        graduationRate: 68
     )
     
     static let samplePrograms: [Program] = [
         Program(
             id: 1,
-            title: "Marketing Automation &\nReporting",
+            name: "Marketing Automation &\nReporting",
             duration: "4 ay",
-            imageName: "examplephoto",
-            status: .active
+            instructorPhotoUrl: "examplephoto",
+            status: 1
         ),
         Program(
             id: 2,
-            title: "iOS Developer",
+            name: "iOS Developer",
             duration: "4 ay",
-            imageName: "examplephoto",
-            status: .active
+            instructorPhotoUrl: "examplephoto",
+            status: 1
         ),
         Program(
             id: 3,
-            title: "Backend Java Developer",
+            name: "Backend Java Developer",
             duration: "4 ay",
-            imageName: "examplephoto",
-            status: .active
+            instructorPhotoUrl: "examplephoto",
+            status: 2
         ),
         Program(
             id: 4,
-            title: "Backend Java Developer",
+            name: "Backend Java Developer",
             duration: "4 ay",
-            imageName: "person",
-            status: .active
+            instructorPhotoUrl: "person",
+            status: 2
         ),
         Program(
             id: 5,
-            title: "Backend Java Developer",
+            name: "Backend Java Developer",
             duration: "4 ay",
-            imageName: "person",
-            status: .active
+            instructorPhotoUrl: "person",
+            status: 2
         )
     ]
 }

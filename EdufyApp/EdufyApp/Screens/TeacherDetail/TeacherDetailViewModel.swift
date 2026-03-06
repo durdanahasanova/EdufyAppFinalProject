@@ -15,9 +15,9 @@ class TeacherDetailViewModel: ObservableObject {
     @Published var errorMessage: String?
 
     private let networkService: NetworkService = DefaultNetworkService()
-    private let teacherId: String
+    private let teacherId: Int
 
-    init(teacherId: String) {
+    init(teacherId: Int) {
         self.teacherId = teacherId
     }
 

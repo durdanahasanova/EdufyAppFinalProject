@@ -13,7 +13,7 @@ final class FavoritesManager: ObservableObject {
 
     static let shared = FavoritesManager()
 
-    @Published var favoriteIDs: Set<String> = []
+    @Published var favoriteIDs: Set<Int> = []
 
     private let key = "edufy_favorite_videos"
 
@@ -22,7 +22,7 @@ final class FavoritesManager: ObservableObject {
     }
 
     // MARK: - Toggle 
-    func toggle(_ videoId: String) {
+    func toggle(_ videoId: Int) {
         if favoriteIDs.contains(videoId) {
             favoriteIDs.remove(videoId)
         } else {
@@ -32,7 +32,7 @@ final class FavoritesManager: ObservableObject {
     }
 
     // MARK: - Yoxla
-    func isFavorite(_ videoId: String) -> Bool {
+    func isFavorite(_ videoId: Int) -> Bool {
         favoriteIDs.contains(videoId)
     }
 
@@ -43,8 +43,9 @@ final class FavoritesManager: ObservableObject {
     }
 
     private func loadFavorites() {
-        let array = UserDefaults.standard.stringArray(forKey: key) ?? []
-        favoriteIDs = Set(array)
+        if let savedArray = UserDefaults.standard.array(forKey: key) as? [Int] {
+            favoriteIDs = Set(savedArray)
+        }
     }
 
     // MARK: - Logout zamani temizle

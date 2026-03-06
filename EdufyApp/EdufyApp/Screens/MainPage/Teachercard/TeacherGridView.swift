@@ -10,7 +10,7 @@ import SwiftUI
 struct TeacherGridView: View {
     
     @StateObject private var viewModel = TeacherViewModel()
-    @State private var selectedTeacherId : String?
+    @State private var selectedTeacherId : Int?
     
     private let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -30,9 +30,9 @@ struct TeacherGridView: View {
                 LazyVGrid(columns: columns) {
                     ForEach(viewModel.teachers) { teacher in
                         TeacherCard(teacherPhoto: teacher.photoUrl,
-                                    lessonPrice: teacher.price,
+                                    lessonPrice: teacher.priceAzn,
                                     teacherName: teacher.fullName,
-                                    subject: teacher.subject,
+                                    subject: teacher.specialization,
                                     onTapDetails:
                                         {
                             selectedTeacherId = teacher.id

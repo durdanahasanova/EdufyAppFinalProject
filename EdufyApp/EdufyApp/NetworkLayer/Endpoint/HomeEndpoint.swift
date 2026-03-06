@@ -11,9 +11,9 @@ enum HomeEndpoint: Endpoint {
     
     case home(popularTake: Int, instructorTake: Int)
     
-    //    var baseURL: String {
-    //        "http://64.226.99.9:8080"
-    //    }
+        var baseURL: String {
+            "http://64.226.99.9:8080"
+        }
     
     var path: String{
         "/api/home"

@@ -17,7 +17,7 @@ struct CourseGridView: View {
                 ForEach(viewModel.courses) { course in
                     
                     NavigationLink {
-                        CourseDetailView(viewModel: AcademyDetailViewModel(academyId: course.id))
+                        AcademyDetailView(viewModel: AcademyDetailViewModel(academyId: course.id))
                     } label: {
                         CourseCard(course: course, backgroundColor: .primaryOrange)
                             .frame(width: 320)

@@ -137,12 +137,12 @@ struct VideoPlayerView: View {
     NavigationStack {
         VideoPlayerView(
             video: DemoVideo(
-                id: "1",
+                id: 1,
                 title: "Swift UI Lesson",
                 thumbnailUrl: nil,
                 videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                 duration: "00:21",
-                teacherName: "Durdana Hasan", teacherId: "1"
+                teacherName: "Durdana Hasan", teacherId: 1
             )
         )
     }

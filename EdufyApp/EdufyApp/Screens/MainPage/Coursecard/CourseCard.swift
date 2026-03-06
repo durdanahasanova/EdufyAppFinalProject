@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CourseCard: View {
     
-    let course: Course
+    let course: Academy
     let backgroundColor: Color
     
     var body: some View {
@@ -26,7 +26,7 @@ struct CourseCard: View {
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     
-                    Text(course.title)
+                    Text(course.name)
                         .multilineTextAlignment(.leading)
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(.black)
@@ -52,7 +52,7 @@ struct CourseCard: View {
     
     @ViewBuilder
     private var logoView: some View {
-        if let url = URL(string: course.logoURL)
+        if let url = URL(string: course.logoUrl)
         {
             
             AsyncImage(url: url) { phase in

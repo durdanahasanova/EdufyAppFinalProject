@@ -14,30 +14,31 @@ struct ProgramCard: View {
                 
                 // Sekil + Badge
                 ZStack(alignment: .bottomLeading) {
-                    Image(program.imageName)
                     
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 100, height: 85)
-                        .clipped()
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.blackHigh, lineWidth: 2)
-                        )
+                    AsyncImage(url: URL(string: program.instructorPhotoUrl)) { phase in
+                        switch phase {
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        default:
+                            ZStack {
+                                Color.gray.opacity(0.3)
+                                Image(systemName: "photo")
+                                    .foregroundColor(.blackHigh)
+                            }
+                        }
+                    }
+                    .frame(width: 100, height: 85)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.blackHigh, lineWidth: 2)
+                    )
                     
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(.gray.opacity(0.3))
-                                .overlay(
-                                    Image(systemName: "photo")
-                                        .foregroundColor(.blackHigh)
-                                    
-                                )
-                        )
                     
                     // Badge
-                    Text(program.status.rawValue)
+                    Text(program.statusLabel)
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(.black)
                         .padding(.horizontal, 12)
@@ -49,7 +50,7 @@ struct ProgramCard: View {
                 
                 //Title + Duration
                 VStack(alignment: .leading, spacing: 6) {
-                    Text(program.title)
+                    Text(program.name)
                         .appFont(.bodyTextMdBold)
                         .foregroundColor(.blackHigh)
                         .lineLimit(2)
@@ -82,7 +83,6 @@ struct ProgramCard: View {
         .background(.secondaryYellow)
         .cornerRadius(20)
     }
-    
     
 }
 
