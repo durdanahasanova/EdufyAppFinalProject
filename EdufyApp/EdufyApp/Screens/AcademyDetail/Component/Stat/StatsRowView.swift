@@ -9,25 +9,25 @@ import SwiftUI
 
 struct StatsRowView: View {
     
-    let applicationCount: String
-    let studentCount: String
-    let graduatePercentage: String
+    let applicationCount: Int
+    let studentCount: Int
+    let graduatePercentage: Int
     
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             StatsItemView(
-                value: applicationCount,
+                value: "\(applicationCount)+",
                 label: "Proqramlara\nmüraciət sayı")
             .frame(maxWidth: .infinity, alignment: .leading)
             
             StatsItemView(
-                value: studentCount,
+                value: "\(studentCount)",
                 label: "Tələbə sayı"
             )
             .frame(maxWidth: .infinity, alignment: .leading)
             
             StatsItemView(
-                value: graduatePercentage,
+                value: "\(graduatePercentage)%",
                 label: "Məzun olan\ntələbələrin sayı"
             )
             .frame(maxWidth: .infinity, alignment: .leading)

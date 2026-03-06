@@ -153,7 +153,7 @@ struct TeacherDetailView: View {
 #Preview {
     NavigationStack {
         TeacherDetailView(
-            viewModel: TeacherDetailViewModel(teacherId: "1")
+            viewModel: TeacherDetailViewModel(teacherId: 1)
         )
     }
 }

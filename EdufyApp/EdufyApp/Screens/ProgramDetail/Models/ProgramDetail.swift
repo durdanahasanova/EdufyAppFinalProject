@@ -9,17 +9,14 @@ import Foundation
 
 
 struct ProgramDetail: Identifiable, Decodable {
-    let id: String
+    let id: Int
     let name: String
-    let description: String
+    let about: String
     let duration: String
     let groupSize: String
-    let logoName: String
+    //let logoName: String
     let modules: [ProgramModule]
     let instructor: Instructor?
     
-    enum CodingKeys: String, CodingKey {
-        case id, name, description, duration, logoName, modules, instructor
-        case groupSize = "group_size"
-    }
+    
 }

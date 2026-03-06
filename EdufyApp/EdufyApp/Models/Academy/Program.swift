@@ -9,16 +9,21 @@ import Foundation
 
 struct Program: Identifiable, Hashable, Decodable {
     let id: Int
-    let title: String
+    let name: String
     let duration: String
-    let imageName: String
-    let status: ProgramStatus
-}
-
-enum ProgramStatus: String, Decodable {
-    case active = "Active"
-    case inactive = "Inactive"
+    let instructorPhotoUrl: String
+    let status: Int
     
-   
+    
+    var statusLabel: String {
+        switch status {
+        case 1:
+            return "Aktiv"
+        case 0:
+            return "Passiv"
+        default:
+            return "Aktiv"
+        }
+    }
     
 }

@@ -7,11 +7,11 @@ struct InstructorCardView: View {
     var body: some View {
         HStack(alignment: .bottom, spacing: 0) {
             
-            // Sol: mətn və LinkedIn
+            // metn ve LinkedIn
             VStack(alignment: .leading, spacing: 16) {
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(instructor.name)
+                    Text(instructor.fullName)
                         .appFont(.titleMdSemibold)
                         .foregroundColor(.white)
                     
@@ -59,7 +59,7 @@ struct InstructorCardView: View {
     
     @ViewBuilder
     private var instructorImage: some View {
-        if let urlString = instructor.imageUrl,
+        if let urlString = instructor.photoUrl,
            let url = URL(string: urlString) {
             KFImage(url)
                 .placeholder {
@@ -78,10 +78,10 @@ struct InstructorCardView: View {
 }
 
 
-#Preview {
-    InstructorCardView(instructor: Instructor(id: "1",
-                                              name: "Aysel Heyderova",
-                                              bio: "ABB Bank-da Senior iOS developer olaraq fəaliyyət göstərir. 5 ildən artıq təcrübəyə malikdir.",
-                                              imageUrl: "https://example.com/aysel.jpg",
-                                              linkedinUrl: "https://linkedin.com/in/aysel"))
-}
+//#Preview {
+//    InstructorCardView(instructor: Instructor(id: 1,
+//                                              name: "Aysel Heyderova",
+//                                              bio: "ABB Bank-da Senior iOS developer olaraq fəaliyyət göstərir. 5 ildən artıq təcrübəyə malikdir.",
+//                                              imageUrl: "https://example.com/aysel.jpg",
+//                                              linkedinUrl: "https://linkedin.com/in/aysel"))
+//}

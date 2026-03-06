@@ -32,6 +32,6 @@ import SwiftUI
 
 
 #Preview {
-    AboutSectionView(text: MockAcademyData.sampleAcademy.aboutText)
+    AboutSectionView(text: MockAcademyData.sampleAcademy.about)
 }
 

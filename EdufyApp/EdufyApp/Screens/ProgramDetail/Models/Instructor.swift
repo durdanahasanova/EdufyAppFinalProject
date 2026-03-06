@@ -8,15 +8,11 @@
 import Foundation
 
 struct Instructor: Identifiable, Codable {
-    let id: String
-    let name: String
+    let id: Int
+    let fullName: String
+    let specialization: String
     let bio: String
-    let imageUrl: String?
-    let linkedinUrl: String?
+    let photoUrl: String?
+    let linkedInUrl: String?
     
-    enum CodingKeys: String, CodingKey {
-        case id, name, bio
-        case imageUrl = "image_url"
-        case linkedinUrl = "linkedin_url"
-    }
 }

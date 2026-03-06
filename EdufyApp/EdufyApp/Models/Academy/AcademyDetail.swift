@@ -8,15 +8,15 @@
 import Foundation
 
 struct AcademyDetail: Identifiable, Decodable {
-    let id: String
+    let id: Int
     let name: String
-    let logoName: String
-    let aboutText: String
+    let logoUrl: String
+    let about: String
     let programs: [Program]
     
-    let applicationCount: String
-    let studentCount: String
-    let graduatePercentage: String
+    let totalApplications: Int
+    let totalStudents: Int
+    let graduationRate: Int
 }
 
 

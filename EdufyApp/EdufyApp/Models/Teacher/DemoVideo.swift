@@ -8,13 +8,13 @@
 import Foundation
 
 struct DemoVideo: Identifiable, Codable , Hashable{
-    let id: String
+    let id: Int
     let title: String
     let thumbnailUrl: String?
     let videoUrl: String
     let duration: String
     let teacherName: String
-    let teacherId: String?
+    let teacherId: Int?
     
     enum CodingKeys: String, CodingKey {
         case id, title, duration

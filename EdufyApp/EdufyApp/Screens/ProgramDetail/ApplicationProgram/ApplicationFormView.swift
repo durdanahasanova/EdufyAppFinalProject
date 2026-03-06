@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ApplicationFormView: View {
-    @StateObject var viewModel: ProgramDetailViewModel
+    @ObservedObject var viewModel: ProgramDetailViewModel
     @Environment(\.dismiss) private var dismiss
     
     @State private var firstName: String = ""

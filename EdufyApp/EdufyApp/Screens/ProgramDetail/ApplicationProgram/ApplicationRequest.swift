@@ -11,7 +11,7 @@ struct ApplicationRequest: Encodable {
     let programId: Int
     let firstName: String
     let lastName: String
-    let phone: String
+    let phoneNumber: String
     
 }
 

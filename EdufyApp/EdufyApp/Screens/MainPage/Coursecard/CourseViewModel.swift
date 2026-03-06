@@ -10,7 +10,7 @@ import SwiftUI
 
 @MainActor
 final class CourseViewModel: ObservableObject {
-    @Published var courses: [Course] = []
+    @Published var courses: [Academy] = []
     @Published var isLoading: Bool = false
     private let networkService: NetworkService = DefaultNetworkService()
 
@@ -45,19 +45,19 @@ final class CourseViewModel: ObservableObject {
 
     }
 
-    static let mockCourses: [Course] = [
-        Course(
-            id: "1",
-            title: "Code Academy",
+    static let mockCourses: [Academy] = [
+        Academy(
+            id: 1,
+            name: "Code Academy",
             programCount: 8,
-            logoURL: "https://via.placeholder.com/120"
+            logoUrl: "https://via.placeholder.com/120"
         ),
 
-        Course(
-            id: "2",
-            title: "ABB Tech",
+        Academy(
+            id: 2,
+            name: "ABB Tech",
             programCount: 6,
-            logoURL: "https://via.placeholder.com/120"
+            logoUrl: "https://via.placeholder.com/120"
         ),
     ]
 }

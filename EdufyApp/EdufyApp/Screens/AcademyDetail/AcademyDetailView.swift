@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CourseDetailView: View {
+struct AcademyDetailView: View {
     
     @StateObject var viewModel: AcademyDetailViewModel
     @Environment(\.dismiss) private var dismiss
@@ -21,7 +21,8 @@ struct CourseDetailView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationDestination(item: $viewModel.selectedProgram, destination: { program in
-            ProgramDetailView(viewModel: ProgramDetailViewModel(programId: program.id))
+            ProgramDetailView(viewModel: ProgramDetailViewModel(programId: program.id, instructorPhotoUrl: program.instructorPhotoUrl))
+
         })
         .task {
             await viewModel.fetchAcademyDetail()
@@ -36,9 +37,11 @@ struct CourseDetailView: View {
                 backButton
                 
                 DetailHeaderView(
-                    logoName: viewModel.logoName,
+                    logoName: viewModel.logoUrl,
                     name: viewModel.academyName
                 )
+                
+                
                 
                 VStack(alignment: .leading, spacing: 40) {
                     AboutSectionView(text: viewModel.aboutText)
@@ -77,8 +80,8 @@ struct CourseDetailView: View {
 
 #Preview {
     NavigationStack {
-        CourseDetailView(
-            viewModel: AcademyDetailViewModel(academyId: "1")
+        AcademyDetailView(
+            viewModel: AcademyDetailViewModel(academyId: 1)
         )
     }
 }

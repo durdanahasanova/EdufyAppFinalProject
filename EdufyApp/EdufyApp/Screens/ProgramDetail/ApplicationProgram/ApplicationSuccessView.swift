@@ -25,7 +25,7 @@ struct ApplicationSuccessView: View {
                     .frame(width: 182, height: 192)
                 
                 // Metnler
-                VStack(alignment: .center, spacing: 16) {
+                VStack(alignment: .center, spacing: 12) {
                     Text("Müraciət uğurla göndərildi")
                         .appFont(.titleSmBold)
                         .foregroundStyle(.whiteHigh)
@@ -36,7 +36,7 @@ struct ApplicationSuccessView: View {
                         .foregroundStyle(.whiteMedium)
                         .multilineTextAlignment(.center)
                 }
-                .padding(.top, 36)
+                .padding(.top, 24)
                 .padding(.horizontal, 56)
                 
                 Spacer()

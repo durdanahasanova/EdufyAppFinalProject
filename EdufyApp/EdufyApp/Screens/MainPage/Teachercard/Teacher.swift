@@ -8,9 +8,9 @@
 import Foundation
 
 struct Teacher: Identifiable, Decodable {
-    let id: String
+    let id: Int
     let photoUrl: String
     let fullName: String
-    let subject: String
-    let price: Int
+    let specialization: String
+    let priceAzn: Int
 }

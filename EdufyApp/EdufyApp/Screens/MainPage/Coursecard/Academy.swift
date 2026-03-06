@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Course: Identifiable, Decodable {
-    let id: String
-    let title: String
+struct Academy: Identifiable, Decodable {
+    let id: Int
+    let name: String
     let programCount: Int
-    let logoURL: String
+    let logoUrl: String
 }
