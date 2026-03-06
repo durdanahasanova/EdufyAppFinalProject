@@ -24,6 +24,7 @@ struct ProfileView: View {
                         .appFont(.titleLSemibold)
                         .foregroundStyle(.whiteHigh)
                         .padding(.top, 16)
+                        .padding(.horizontal, 16)
                     
                     
                     //MARK: - USer Profile Card
@@ -47,74 +48,58 @@ struct ProfileView: View {
                             
                             Spacer()
                             
-//                            Circle()
-//                                .fill(Color.gray.opacity(0.3))
-//                                .frame(width: 70, height: 70)
-//                                .overlay(
-//                                    Image(systemName: "person.fill")
-//                                        .font(.system(size: 30))
-//                                        .foregroundStyle(.gray)
-//                                )
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 20)
+                        .background(.profileBackground)
+                        .cornerRadius(16)
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            
+                            ProfileMenuItem(icon: "lock", title: "Parolu dəyiş") {
+                                showResetPassword = true
+                            }
+                            
+                            ProfileMenuItem(icon: "logout", title: "Çıxış et") {
+                                viewModel.showLogoutAlert = true
+                            }
                         }
                         
-//                        HStack(spacing: 12) {
-//                            ProfileSmallButton(title: "Editle") {}
-//                            ProfileSmallButton(title: "şəkli dəyiş") {}
-//                        }
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 20)
-                    .background(.profileBackground)
-                    .cornerRadius(16)
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-//                        ProfileMenuItem(icon: "globe", title: "Dil deyis") {
-//                            
-//                        }
-                        
-                        ProfileMenuItem(icon: "lock", title: "Parolu dəyiş") {
-                            showResetPassword = true
-                        }
-                        
-                        ProfileMenuItem(icon: "logout", title: "Çıxış et") {
-                            viewModel.showLogoutAlert = true
-                        }
+                        Spacer()
                     }
                     
-                    Spacer()
+                    .padding()
+                    .task {
+                        viewModel.fetchUser()
+                    }
+                    
+                    
+                }
+                .navigationDestination(isPresented: $showResetPassword, destination: {
+                    //ResetPasswordView(email: "", code: "")
+                    ForgotPasswordView()
+                })
+                
+                //ALERT
+                .alert("Çıxış et", isPresented: $viewModel.showLogoutAlert) {
+                    Button("Beli", role: .destructive) {
+                        viewModel.logout()
+                    }
+                    Button("Xeyr", role: .cancel) {}
+                } message: {
+                    Text("Çıxış etmək istədiyinizdən əminsiniz?")
                 }
                 
-                .padding()
-                .task {
-                    viewModel.fetchUser()
+                // Switch Login page
+                .onChange(of: viewModel.didLogout) { oldValue, newValue in
+                    if newValue {
+                        isLoggedIn = false
+                    }
                 }
-                
-                
             }
-            .navigationDestination(isPresented: $showResetPassword, destination: {
-                ResetPasswordView(email: "", code: "")
-            })
             
-            //ALERT
-            .alert("Çıxış et", isPresented: $viewModel.showLogoutAlert) {
-                Button("Beli", role: .destructive) {
-                    viewModel.logout()
-                }
-                Button("Xeyr", role: .cancel) {}
-            } message: {
-                Text("Çıxış etmək istədiyinizdən əminsiniz?")
-            }
             
-            // Switch Login page
-            .onChange(of: viewModel.didLogout) { oldValue, newValue in
-                if newValue {
-                    isLoggedIn = false
-                }
-            }
         }
-        
-        
     }
+    
 }
-
-

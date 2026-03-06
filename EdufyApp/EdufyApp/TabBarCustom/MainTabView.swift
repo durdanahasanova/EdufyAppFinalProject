@@ -28,13 +28,13 @@ struct MainTabView: View {
             
             FavoritesView()
                 .tabItem {
-                    Image("tab_heart")
+                    Image("tab_favorites")
                     Text("Sevimlilər")
                 }
             
             ProfileView(isLoggedIn: $isLoggedIn)
                 .tabItem {
-                    Image(systemName: "person.fill")
+                    Image("tab_profile")
                     Text("Profile")
                 }
         }

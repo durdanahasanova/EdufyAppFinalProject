@@ -21,11 +21,19 @@ final class ProfileViewModel: ObservableObject {
     func fetchUser() {
         Task {
             do {
-                let response: APIResponse<UserData> = try await networkService.request(AuthEndpoint.me)
-                if let user = response.data {
+                //Mail
+                let meResponse: APIResponse<UserData> = try await networkService.request(AuthEndpoint.me)
+                if let user = meResponse.data {
                     //userName = user.displayName
                     userEmail = user.email
                 }
+                
+                //Ad
+                let nameResponse: APIResponse<HomeResponse> = try await networkService.request(HomeEndpoint.home(popularTake: 1, instructorTake: 1))
+                if let user = nameResponse.data?.greetingName {
+                    userName = user
+                }
+                
             } catch {
                 print("LOG: Profile fetch xetasi - \(error)")
                 userName = "İstifadəçi"

@@ -23,7 +23,7 @@ enum TabItem: CaseIterable {
         switch self {
         case .home: return "tab_home"
         case .explore: return "tab_explore"
-        case .favorites: return "tab_fav"
+        case .favorites: return "tab_favorites"
         case .profile: return "tab_profile"
         }
     }
