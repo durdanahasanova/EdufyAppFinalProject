@@ -14,10 +14,8 @@ enum AuthEndpoint: Endpoint {
     case refresh(String)
     case logout(String)
     case me
-    
-//    var baseURL: String {
-//        "http://64.226.99.9:8080"
-//    }
+    case forgotPassword(String)
+    case resetPassword(String, String, String)
     
     var path: String {
         switch self {
@@ -32,12 +30,16 @@ enum AuthEndpoint: Endpoint {
             return "/api/auth/logout"
         case .me:
             return "/api/auth/me"
+        case .forgotPassword:
+             return "/api/auth/forgot-password"
+        case .resetPassword:
+            return "/api/auth/reset-password"
         }
     }
     
     var method: HttpMethod {
         switch self {
-        case .login, .register, .refresh, .logout:
+        case .login, .register, .refresh, .logout, .forgotPassword, .resetPassword:
             return .post
         case .me:
             return .get
@@ -76,6 +78,10 @@ enum AuthEndpoint: Endpoint {
             
         case .me:
             return nil
+        case .forgotPassword(let email):
+            return ForgotPasswordRequest(email: email)
+        case .resetPassword(let email, let code, let newPassword):
+            return ResetPasswordRequest(email: email, code: code, newPassword: newPassword)
         }
         
     }

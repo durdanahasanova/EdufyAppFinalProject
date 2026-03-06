@@ -32,3 +32,16 @@ struct RegisterRequest: Encodable {
 struct RefreshRequest: Encodable {
     let refreshToken: String
 }
+
+// MARK: - ForgotPassword
+struct ForgotPasswordRequest: Encodable {
+    let email: String
+}
+
+
+// MARK: - ResetPasswordRequest
+struct ResetPasswordRequest: Encodable {
+    let email: String
+    let code: String
+    let newPassword: String
+}

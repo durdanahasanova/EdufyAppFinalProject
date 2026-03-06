@@ -25,6 +25,8 @@ final class ResetPasswordViewModel: ObservableObject {
     @Published var alertMessage: String? = nil
     @Published var isSuccess = false
     
+    private let networkService: NetworkService = DefaultNetworkService()
+    
     var isFormValid: Bool {
         password.count >= 8
         && password.range(of: "[A-Z]", options: .regularExpression) != nil
@@ -40,10 +42,54 @@ final class ResetPasswordViewModel: ObservableObject {
         validate()
         guard isFormValid else { return }
         
-        // TODO: API qosulacaq 
+        // TODO: API qosulacaq
         isSuccess = true
         alertMessage = "Sifreniz ugurla yenilendi"
         showAlert = true
+    }
+    
+    private func performResetPassword(email: String, code: String) async {
+        isLoading = true
+        
+        defer {
+            isLoading = false
+        }
+        
+        do {
+            let response: APIResponse<String?> = try await networkService.request(
+                AuthEndpoint.resetPassword(email, code, password))
+            
+            if response.success {
+                print("LOG: Şifrə uğurla yeniləndi")
+                isSuccess = true
+                alertMessage = "Şifrəniz uğurla yeniləndi"
+                showAlert = true
+            } else {
+                isSuccess = false
+                alertMessage = response.message ?? "Xəta baş verdi"
+                showAlert = true
+            }
+            
+            
+        } catch let error as NetworkError {
+            if case .serverError(let statusCode) = error {
+                if statusCode == 400 {
+                    alertMessage = "Kod yanlış və ya müddəti bitib"
+                } else {
+                    alertMessage = "Xəta baş verdi. Yenidən cəhd edin"
+                }
+            } else {
+                alertMessage = "İnternet bağlantınızı yoxlayın"
+            }
+            isSuccess = false
+            showAlert = true
+        }
+        
+        catch  {
+            alertMessage = "Xəta baş verdi"
+            isSuccess = false
+            showAlert = true
+        }
     }
     
     private func validate() {

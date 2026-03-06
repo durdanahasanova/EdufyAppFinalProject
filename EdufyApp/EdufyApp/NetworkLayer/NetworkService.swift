@@ -7,6 +7,7 @@ protocol NetworkService {
     func request<T: Decodable>(_ endpoint: Endpoint) async throws -> T
 }
 
+
 final class DefaultNetworkService: NetworkService {
 
     private let session: URLSession
@@ -26,9 +27,36 @@ final class DefaultNetworkService: NetworkService {
                 
                 
                 if let httpResponse = response as? HTTPURLResponse {
-                    
                     let statusCode = httpResponse.statusCode
                     
+                    //401 refresh token
+                    if statusCode == 401 {
+                        guard let refreshToken = TokenManager.shared.refreshToken else {
+                            throw NetworkError.serverError(statusCode: 401)
+                        }
+                        
+                        let refreshRequest = AuthEndpoint.refresh(refreshToken).makeRequest()
+                        guard case .success(let refreshURLRequest) = refreshRequest else {
+                            throw NetworkError.serverError(statusCode: 401)
+                        }
+                        
+                        let (refreshData, _) = try await session.data(for: refreshURLRequest)
+                        let refreshResponse = try JSONDecoder().decode(APIResponse<LoginData>.self, from: refreshData)
+                        
+                        
+                        guard refreshResponse.success, let loginData = refreshResponse.data else {
+                            //fail token-logout
+                            TokenManager.shared.clearTokens()
+                            throw NetworkError.serverError(statusCode: 401)
+                        }
+                        
+                        TokenManager.shared.saveTokens(
+                            access: loginData.accessToken,
+                            refresh: loginData.refreshToken
+                        )
+                        print("LOG: Token yenilendi")
+                        return try await self.request(endpoint)
+                    }
                     guard (200...299).contains(statusCode) else {
                         throw NetworkError.serverError(statusCode: statusCode)
                     }
@@ -48,6 +76,8 @@ final class DefaultNetworkService: NetworkService {
             throw error
         }
     }
+    
+    
     
     func request<T: Decodable>(_ endpoint: Endpoint, completion: @escaping (Result<T, NetworkError>) -> Void) {
         
