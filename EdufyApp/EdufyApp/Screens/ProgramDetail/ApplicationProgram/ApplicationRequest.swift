@@ -12,7 +12,6 @@ struct ApplicationRequest: Encodable {
     let firstName: String
     let lastName: String
     let phone: String
-    
 }
 
 struct ApplicationResponse: Decodable {
