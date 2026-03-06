@@ -24,7 +24,7 @@ struct TeacherCard: View {
                     .foregroundStyle(.white)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
-                    .background(.black.opacity(0.7))
+                    .background(.blackMedium)
                     .clipShape(Capsule())
                     .padding(12)
             }
@@ -54,7 +54,7 @@ struct TeacherCard: View {
                     .foregroundStyle(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
-                    .background(Color(red: 0.95, green: 0.95, blue: 0.35))
+                    .background(.primaryYellow)
                     .clipShape(Capsule())
             }
             .buttonStyle(.plain)

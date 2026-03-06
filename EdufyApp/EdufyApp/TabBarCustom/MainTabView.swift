@@ -10,33 +10,28 @@ import SwiftUI
 struct MainTabView: View {
     
     @Binding var isLoggedIn: Bool
+    @State private var selectedTab: TabItem = .home
     
     var body: some View {
-        TabView {
-            
-            MainPageView()
-                .tabItem {
-                    Image("tab_home")
-                    Text("Ana səhifə")
+        
+        ZStack(alignment: .bottom) {
+            Group {
+                switch selectedTab {
+                case .home:
+                    MainPageView()
+                case .explore:
+                    DiscoverView()
+                case .favorites:
+                    FavoritesView()
+                case .profile:
+                    ProfileView(isLoggedIn: $isLoggedIn)
                 }
-       
-            DiscoverView()
-                .tabItem {
-                    Image("tab_explore")
-                    Text("Kəşfet")
-                }
-            
-            FavoritesView()
-                .tabItem {
-                    Image("tab_favorites")
-                    Text("Sevimlilər")
-                }
-            
-            ProfileView(isLoggedIn: $isLoggedIn)
-                .tabItem {
-                    Image("tab_profile")
-                    Text("Profile")
-                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.bottom, 82)
+            CustomTabBar(selectedTab: $selectedTab)
         }
+        .ignoresSafeArea(edges: .bottom)
+        
     }
 }
