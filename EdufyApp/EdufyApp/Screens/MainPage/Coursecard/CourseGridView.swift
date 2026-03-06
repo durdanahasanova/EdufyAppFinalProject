@@ -19,7 +19,7 @@ struct CourseGridView: View {
                     NavigationLink {
                         AcademyDetailView(viewModel: AcademyDetailViewModel(academyId: course.id))
                     } label: {
-                        CourseCard(course: course, backgroundColor: .primaryOrange)
+                        CourseCard(course: course, backgroundColor: .primaryPurple)
                             .frame(width: 320)
                     }
                 }
