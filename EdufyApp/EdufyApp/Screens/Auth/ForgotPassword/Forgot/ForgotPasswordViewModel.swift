@@ -9,6 +9,10 @@
 import Foundation
 import Combine
 
+struct ForgotPasswordData: Decodable {
+    let message: String?
+}
+
 @MainActor
 final class ForgotPasswordViewModel: ObservableObject {
     
@@ -34,7 +38,11 @@ final class ForgotPasswordViewModel: ObservableObject {
         validate()
         guard isValidEmail else { return }
         
+        showAlert = false
+        apiError = nil
+        
         Task { await performSendCode() }
+        
         
     }
     
@@ -46,10 +54,11 @@ final class ForgotPasswordViewModel: ObservableObject {
         }
         
         do {
-            let response: APIResponse<String?> = try await networkService.request(AuthEndpoint.forgotPassword(email))
+            let response: APIResponse<ForgotPasswordData> = try await networkService.request(AuthEndpoint.forgotPassword(email))
             
             if response.success {
                 print("LOG: OTP kodu gonderildi")
+                showAlert = false
                 navigateToOTP = true
             } else {
                 apiError = response.message ?? "Xəta baş verdi"

@@ -30,7 +30,7 @@ struct TeacherInfoRowView: View {
                     .appFont(.textMdRegular)
                     .foregroundStyle(.blackHigh)
                 
-                Text(value)
+                Text("\(value)")
                     .appFont(.bodyTextMdSemibold)
             }
         }

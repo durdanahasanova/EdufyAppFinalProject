@@ -10,6 +10,7 @@ import SwiftUI
 struct OTPView: View {
     
     let email: String
+    var onSuccess: (() -> Void)? = nil
     @StateObject private var viewModel = OTPViewModel()
     @Environment(\.dismiss) private var dismiss
     
@@ -71,7 +72,13 @@ struct OTPView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $viewModel.navigateToReset) {
-            ResetPasswordView(email: email, code: viewModel.code)
+            ResetPasswordView(email: email, code: viewModel.code) {
+                if let onSuccess = onSuccess {
+                    onSuccess()
+                } else {
+                    dismiss()
+                }
+            }
         }
     }
 }

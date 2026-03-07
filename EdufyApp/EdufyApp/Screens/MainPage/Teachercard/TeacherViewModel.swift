@@ -40,17 +40,19 @@ class TeacherViewModel: ObservableObject {
             print("LOG: Fetch error: \(error), Mock data istifade olundu")
         }
 
-        teachers = TeacherViewModel.mockTeachers
+        //teachers = TeacherViewModel.mockTeachers
 
     }
 
-    static let mockTeachers: [Teacher] = TeacherMockData.all.map { detail in
-        Teacher(
-            id: detail.id,
-            photoUrl: detail.photoUrl ?? "",
-            fullName: detail.fullName,
-            specialization: detail.specialization,
-            priceAzn: Int(detail.priceAzn.replacingOccurrences(of: " AZN", with: "")) ?? 0
-        )
-    }
+//    static let mockTeachers: [Teacher] = TeacherMockData.all.map { detail in
+//        Teacher(
+//            id: detail.id,
+//            photoUrl: detail.photoUrl ?? "",
+//            fullName: detail.fullName,
+//            specialization: detail.specialization,
+//            priceAzn: Int(
+//                detail.priceAzn.replacingOccurrences(of: " AZN", with: "")
+//            ) ?? 0
+//        )
+//    }
 }

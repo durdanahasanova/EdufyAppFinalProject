@@ -15,6 +15,7 @@ struct VideoPlayerView: View {
     let duration: String
     let teacherName: String
     let teacherId: Int?
+    let specialization: String
 
     //let video: DemoVideo
     @State private var navigateToTeacher = false
@@ -22,12 +23,13 @@ struct VideoPlayerView: View {
     @State private var player: AVPlayer?
 
     // MARK: - DemoVideo init
-    init(video: DemoVideo) {
+    init(video: DemoVideo, instructorName: String, instructorId: Int, specialization: String) {
         self.videoUrl = video.videoUrl
         self.title = video.title
-        self.duration = video.duration
-        self.teacherName = video.teacherName
-        self.teacherId = video.teacherId
+        self.duration = "\(video.duration)"
+        self.teacherName = instructorName
+        self.teacherId = instructorId
+        self.specialization = specialization
     }
 
     // MARK: - SavedVideo init
@@ -37,6 +39,7 @@ struct VideoPlayerView: View {
         self.duration = "\(savedVideo.durationMinutes) dəq"
         self.teacherName = savedVideo.instructorFullName ?? "-"
         self.teacherId = savedVideo.instructorId
+        self.specialization = ""
     }
 
     var body: some View {
@@ -66,7 +69,7 @@ struct VideoPlayerView: View {
                     } label: {
                         Image(systemName: "arrow.left")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.blackHigh)
+                            .foregroundColor(.whiteHigh)
                             .frame(width: 36, height: 36)
 
                             .clipShape(Circle())
@@ -159,19 +162,19 @@ struct VideoPlayerView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        VideoPlayerView(
-            video: DemoVideo(
-                id: 1,
-                title: "Swift UI Lesson",
-                thumbnailUrl: nil,
-                videoUrl:
-                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                duration: "00:21",
-                teacherName: "Durdana Hasan",
-                teacherId: 1
-            )
-        )
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        VideoPlayerView(
+//            video: DemoVideo(
+//                id: 1,
+//                title: "Swift UI Lesson",
+//                thumbnailUrl: nil,
+//                videoUrl:
+//                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+//                duration: 21,
+//                teacherName: "Durdana Hasan",
+//                teacherId: 1
+//            )
+//        )
+//    }
+//}

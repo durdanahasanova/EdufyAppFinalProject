@@ -55,6 +55,7 @@ final class ProfileViewModel: ObservableObject {
         }
         
         TokenManager.shared.clearTokens()
+        UserDefaults.standard.removeObject(forKey: "hasSeenOnboarding")
         didLogout = true
     }
 }

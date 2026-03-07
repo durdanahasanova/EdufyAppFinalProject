@@ -12,7 +12,7 @@ struct DemoVideo: Identifiable, Codable , Hashable{
     let title: String
     let thumbnailUrl: String?
     let videoUrl: String
-    let duration: String
+    let duration: Int
     let teacherName: String
     let teacherId: Int?
    // let isLiked: Bool

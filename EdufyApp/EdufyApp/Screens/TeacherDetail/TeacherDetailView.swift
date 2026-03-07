@@ -13,6 +13,11 @@ struct TeacherDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedVideo: DemoVideo?
 
+    //    init(teacherId: Int) {
+    //        _viewModel = StateObject(wrappedValue: TeacherDetailViewModel(teacherId: teacherId))
+    //
+    //    }
+
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16),
@@ -107,7 +112,7 @@ struct TeacherDetailView: View {
                         TeacherInfoRowView(
                             icon: "dollarsign.circle",
                             title: "Aylıq dərs qiyməti",
-                            value: viewModel.monthlyPrice
+                            value: "\(viewModel.monthlyPrice)"
                         )
 
                         TeacherInfoRowView(
@@ -150,7 +155,12 @@ struct TeacherDetailView: View {
             }
         }
         .navigationDestination(item: $selectedVideo) { video in
-            VideoPlayerView(video: video)
+            VideoPlayerView(
+                video: video,
+                instructorName: viewModel.name,
+                instructorId: viewModel.teacherDetail?.id ?? 0,
+                specialization: viewModel.teacherDetail?.specialization ?? ""
+            )
         }
         .navigationBarBackButtonHidden(true)
         .task {

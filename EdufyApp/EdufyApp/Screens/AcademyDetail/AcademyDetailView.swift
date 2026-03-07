@@ -22,7 +22,7 @@ struct AcademyDetailView: View {
         .navigationBarBackButtonHidden(true)
         .navigationDestination(item: $viewModel.selectedProgram, destination: { program in
             ProgramDetailView(viewModel: ProgramDetailViewModel(programId: program.id, instructorPhotoUrl: program.instructorPhotoUrl))
-
+            
         })
         .task {
             await viewModel.fetchAcademyDetail()
@@ -75,7 +75,7 @@ struct AcademyDetailView: View {
             
         }
     }
-        
+    
 }
 
 #Preview {

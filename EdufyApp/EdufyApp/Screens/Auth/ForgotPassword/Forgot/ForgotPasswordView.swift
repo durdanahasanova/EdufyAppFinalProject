@@ -12,6 +12,9 @@ struct ForgotPasswordView: View {
     @StateObject private var viewModel = ForgotPasswordViewModel()
     @Environment(\.dismiss) private var dismiss
     var prefillEmail: String = ""
+    @State private var passwordResetSuccess = false
+    var dismissOnSuccess: Bool = true
+    var onSuccess: (() -> Void)? = nil
 
     var body: some View {
         ZStack {
@@ -73,13 +76,18 @@ struct ForgotPasswordView: View {
             .padding(.top, 16)
         }
         .navigationBarBackButtonHidden(true)
-        .onAppear{
+        .onAppear {
             if !prefillEmail.isEmpty {
                 viewModel.email = prefillEmail
             }
         }
         .navigationDestination(isPresented: $viewModel.navigateToOTP) {
-            OTPView(email: viewModel.email)
+            OTPView(email: viewModel.email, onSuccess: onSuccess)
+        }
+        .onChange(of: passwordResetSuccess) { oldValue, newValue in
+            if newValue && dismissOnSuccess {
+                dismiss()
+            }
         }
         .alert("Xəta", isPresented: $viewModel.showAlert) {
             Button("Bağla", role: .cancel) {}
