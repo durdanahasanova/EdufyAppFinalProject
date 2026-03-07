@@ -1,23 +1,22 @@
 //
-//  VideoCardView.swift
+//  SaveVideoCard.swift
 //  EdufyApp
 //
-//  Created by Durdana on 26.02.26.
+//  Created by Durdana on 06.03.26.
 //
 
 import SwiftUI
 
-struct DemoVideoCard: View {
-    let video: DemoVideo
+struct SavedVideoCard: View {
+    let video: SavedVideo
     var onTap: (() -> Void)? = nil
-    var showFavorite: Bool = false
     @ObservedObject var favoritesManager = FavoritesManager.shared
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
             ZStack(alignment: .bottomLeading) {
 
-                //  background
+                // Background
                 ZStack {
                     Color.gray.opacity(0.3)
 
@@ -29,9 +28,7 @@ struct DemoVideoCard: View {
                                 AsyncImage(url: url) { phase in
                                     switch phase {
                                     case .success(let image):
-                                        image
-                                            .resizable()
-                                            .scaledToFill()
+                                        image.resizable().scaledToFill()
                                     default:
                                         placeholderView
                                     }
@@ -58,7 +55,7 @@ struct DemoVideoCard: View {
                         Image(systemName: "play.fill")
                             .font(.system(size: 10))
                             .foregroundColor(.black)
-                        Text("\(video.duration) dəq")
+                        Text("\(video.durationMinutes) dəq")
                             .font(.system(size: 11, weight: .semibold))
                             .foregroundColor(.black)
                     }
@@ -72,11 +69,12 @@ struct DemoVideoCard: View {
                     Spacer()
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(video.teacherName)
-                            .font(.system(size: 13, weight: .regular))
-                            .foregroundColor(.white.opacity(0.8))
-
-                        Text(video.title)
+                        if let programName = video.instructorFullName {
+                            Text(programName)
+                                .font(.system(size: 13, weight: .regular))
+                                .foregroundColor(.white.opacity(0.8))
+                        }
+                        Text(video.lessonName)
                             .font(.system(size: 20, weight: .bold))
                             .foregroundColor(.white)
                     }
@@ -86,27 +84,20 @@ struct DemoVideoCard: View {
             .onTapGesture { onTap?() }
 
             // Favori button
-            if showFavorite {
-                Button {
-                    withAnimation {
-                        favoritesManager.toggle(video.id)
-                    }
-                } label: {
-                    Image(
-                        systemName: favoritesManager.isFavorite(video.id)
-                            ? "heart.fill" : "heart"
-                    )
+            Button {
+                withAnimation {
+                    favoritesManager.toggle(video.videoId)
+                }
+            } label: {
+                Image(systemName: "heart.fill")
                     .font(.system(size: 18))
-                    .foregroundColor(
-                        favoritesManager.isFavorite(video.id) ? .white : .white
-                    )
+                    .foregroundColor(.white)
                     .padding(10)
                     .background(.black.opacity(0.5))
                     .clipShape(Circle())
-                }
-                .buttonStyle(.plain)
-                .padding(12)
             }
+            .buttonStyle(.plain)
+            .padding(12)
         }
         .frame(height: 275)
         .frame(maxWidth: .infinity)

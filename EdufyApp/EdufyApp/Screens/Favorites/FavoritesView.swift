@@ -10,7 +10,7 @@ import SwiftUI
 struct FavoritesView: View {
     
     @ObservedObject var favoritesManager = FavoritesManager.shared
-    @State private var selectedVideo: DemoVideo?
+    @State private var selectedVideo: SavedVideo?
     
     private let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -35,7 +35,7 @@ struct FavoritesView: View {
                             .appFont(.titleLSemibold)
                             .foregroundStyle(.whiteHigh)
                         
-                        if favoriteVideos.isEmpty {
+                        if favoritesManager.favoritesVideo.isEmpty {
                             VStack(spacing: 16) {
                                 Image(systemName: "heart.slash")
                                     .font(.system(size: 32))
@@ -56,8 +56,8 @@ struct FavoritesView: View {
                             
                         } else {
                             LazyVGrid(columns: columns, spacing: 16) {
-                                ForEach(favoriteVideos) { video in
-                                    DemoVideoCard(video: video, onTap: { selectedVideo = video }, showFavorite: true)
+                                ForEach(favoritesManager.favoritesVideo) { video in
+                                    SavedVideoCard(video: video, onTap: { selectedVideo = video })
                                 }
                             }
                         }
@@ -67,8 +67,11 @@ struct FavoritesView: View {
                 }
             }
             .navigationDestination(item: $selectedVideo) { video in
-                VideoPlayerView(video: video)
+                VideoPlayerView(savedVideo: video)
             }
+        }
+        .task {
+            await favoritesManager.fetchFavorites()
         }
     }
 }

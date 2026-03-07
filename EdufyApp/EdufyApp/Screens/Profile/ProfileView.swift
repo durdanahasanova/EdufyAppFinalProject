@@ -77,7 +77,7 @@ struct ProfileView: View {
                 }
                 .navigationDestination(isPresented: $showResetPassword, destination: {
                     //ResetPasswordView(email: "", code: "")
-                    ForgotPasswordView()
+                    ForgotPasswordView(prefillEmail: viewModel.userEmail)
                 })
                 
                 //ALERT

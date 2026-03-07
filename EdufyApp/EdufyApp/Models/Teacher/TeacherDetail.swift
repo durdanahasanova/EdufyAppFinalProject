@@ -9,21 +9,16 @@ import Foundation
 
 struct TeacherDetail: Identifiable, Decodable {
     let id: Int
-    let name: String
-    let subject: String
+    let fullName: String
+    let specialization: String
     let photoUrl: String?
     let bio: String
-    let monthlyPrice: String
+    let priceAzn: String
     let address: String
-    let phone: String?
+    let phoneNumber: String?
     let demoVideos: [DemoVideo]
     
     
-    enum CodingKeys: String, CodingKey {
-        case id, name, subject, bio, address, phone
-        case photoUrl = "photo_url"
-        case monthlyPrice = "monthly_price"
-        case demoVideos = "demo_videos"
-    }
+  
 }
 

@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct TeacherDetailView: View {
-    
+
     @StateObject var viewModel: TeacherDetailViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var selectedVideo: DemoVideo?
-    
+
     private let columns = [
         GridItem(.flexible(), spacing: 16),
-        GridItem(.flexible(), spacing: 16)
+        GridItem(.flexible(), spacing: 16),
     ]
-    
+
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
-            
+
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 24) {
-                    
+
                     //MARK: Back button
                     Button {
                         dismiss()
@@ -33,11 +33,12 @@ struct TeacherDetailView: View {
                             .foregroundColor(.white)
                             .frame(width: 28, height: 28)
                     }
-                    
+
                     //MARK: Profile Header
                     VStack(alignment: .center, spacing: 24) {
                         if let urlString = viewModel.photoUrl,
-                           let url = URL(string: urlString) {
+                            let url = URL(string: urlString)
+                        {
                             AsyncImage(url: url) { phase in
                                 switch phase {
                                 case .empty:
@@ -85,53 +86,61 @@ struct TeacherDetailView: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                        
+
                         //MARK: Teacher name & subject
                         VStack(alignment: .center, spacing: 8) {
                             Text(viewModel.name)
                                 .appFont(.titleSmBold)
                                 .foregroundStyle(.whiteHigh)
-                            
-                            Text(viewModel.teacherDetail?.subject ?? "-")
+
+                            Text(viewModel.teacherDetail?.specialization ?? "-")
                                 .appFont(.bodyTextMdRegular)
                                 .foregroundStyle(.whiteHigh)
                         }
                     }
                     .frame(maxWidth: .infinity)
-                    
+
                     AboutSectionView(text: viewModel.bio)
-                    
+
                     //MARK: Info teacher detail
                     VStack(spacing: 16) {
-                        TeacherInfoRowView(icon: "dollarsign.circle",
-                                           title: "Aylıq dərs qiyməti",
-                                           value: viewModel.monthlyPrice)
-                        
+                        TeacherInfoRowView(
+                            icon: "dollarsign.circle",
+                            title: "Aylıq dərs qiyməti",
+                            value: viewModel.monthlyPrice
+                        )
+
                         TeacherInfoRowView(
                             icon: "mappin.circle",
                             title: "Ünvan",
                             value: viewModel.address
                         )
-                        
+
                         TeacherInfoRowView(
                             icon: "phone.circle",
                             title: "Əlaqə nömrəsi",
                             value: viewModel.phone
                         )
                     }
-                    
+
                     //MARK: Demo Video
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Demo videolar")
                             .appFont(.titleSmBold)
                             .foregroundStyle(.whiteHigh)
-                        
+
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(viewModel.demoVideos) { video in
-                                DemoVideoCard(video: video, onTap: {
-                                    self.selectedVideo = video
-                                    print("LOG: Video tapped - \(video.title)")
-                                }, showFavorite: true)
+                                DemoVideoCard(
+                                    video: video,
+                                    onTap: {
+                                        self.selectedVideo = video
+                                        print(
+                                            "LOG: Video tapped - \(video.title)"
+                                        )
+                                    },
+                                    showFavorite: true
+                                )
                             }
                         }
                     }
@@ -150,10 +159,10 @@ struct TeacherDetailView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        TeacherDetailView(
-            viewModel: TeacherDetailViewModel(teacherId: 1)
-        )
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        TeacherDetailView(
+//            viewModel: TeacherDetailViewModel(teacherId: 1)
+//        )
+//    }
+//}

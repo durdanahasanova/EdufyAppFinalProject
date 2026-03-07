@@ -42,10 +42,9 @@ final class ResetPasswordViewModel: ObservableObject {
         validate()
         guard isFormValid else { return }
         
-        // TODO: API qosulacaq
-        isSuccess = true
-        alertMessage = "Sifreniz ugurla yenilendi"
-        showAlert = true
+        Task {
+            await performResetPassword(email: email, code: code)
+        }
     }
     
     private func performResetPassword(email: String, code: String) async {
