@@ -19,7 +19,7 @@ struct ProfileMenuItem: View {
                     .font(.system(size: 20))
                     .foregroundStyle(.blue)
                     .frame(width: 44, height: 44)
-                    .background(.blueBackground)
+                    .background(.yellowMedium)
                     .cornerRadius(16)
                 
                 Text(title)

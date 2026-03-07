@@ -47,6 +47,7 @@ struct EdufyAppApp: App {
                     UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
                 }
             }
+            
         }
     }
 }

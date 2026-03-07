@@ -37,6 +37,12 @@ class TeacherDetailViewModel: ObservableObject {
             if response.success, let data = response.data {
                 teacherDetail = data
                 print("LOG: Teacher detail API-dan ugurla geldi")
+                print("LOG: Teacher detail - \(data.fullName), demoVideos count: \(data.demoVideos.count)")
+                for video in data.demoVideos {
+                    print(
+                        "LOG: Video - id:\(video.id) title:\(video.title) duration:\(video.duration)"
+                    )
+                }
 
             } else {
                 errorMessage = response.message ?? "Xəta baş verdi"
@@ -51,7 +57,12 @@ class TeacherDetailViewModel: ObservableObject {
 
     var name: String { teacherDetail?.fullName ?? "Müəllim adı" }
     var bio: String { teacherDetail?.bio ?? "Müəllim haqqında mılumat yoxdur" }
-    var monthlyPrice: String { teacherDetail?.priceAzn ?? "-" }
+    var monthlyPrice: String {  
+        if let price = teacherDetail?.priceAzn {
+            return "\(Int(price)) AZN"
+        }
+        return "-"
+    }
     var address: String { teacherDetail?.address ?? "-" }
     var phone: String { teacherDetail?.phoneNumber ?? "-" }
     var photoUrl: String? { teacherDetail?.photoUrl }

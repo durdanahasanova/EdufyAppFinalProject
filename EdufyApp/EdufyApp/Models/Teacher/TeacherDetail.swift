@@ -13,7 +13,7 @@ struct TeacherDetail: Identifiable, Decodable {
     let specialization: String
     let photoUrl: String?
     let bio: String
-    let priceAzn: String
+    let priceAzn: Double
     let address: String
     let phoneNumber: String?
     let demoVideos: [DemoVideo]

@@ -18,10 +18,10 @@ struct ProgramInfoView: View {
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Tədris müddəti")
-                        .font(.system(size: 14, weight: .medium))
+                        .appFont(.textLMedium)
                         .foregroundColor(.whiteHigh)
                     Text(duration)
-                        .font(.system(size: 13, weight: .regular))
+                        .appFont(.textMdRegular)
                         .foregroundColor(.whiteHigh)
                 }
             }

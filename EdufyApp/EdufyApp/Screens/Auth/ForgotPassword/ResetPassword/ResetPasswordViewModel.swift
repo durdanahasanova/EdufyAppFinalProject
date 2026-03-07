@@ -5,59 +5,66 @@
 //  Created by Durdana on 03.03.26.
 //
 
-import Foundation
 import Combine
+import Foundation
+
+struct ResetPasswordData: Decodable {
+    let message: String?
+}
 
 @MainActor
 final class ResetPasswordViewModel: ObservableObject {
-    
+
     @Published var password: String = "" { didSet { validate() } }
     @Published var confirmPassword: String = "" { didSet { validate() } }
-    
+
     @Published var touchPassword = false
     @Published var touchConfirm = false
-    
+
     @Published var passwordError: String? = nil
     @Published var confirmError: String? = nil
-    
+
     @Published var isLoading = false
     @Published var showAlert = false
     @Published var alertMessage: String? = nil
     @Published var isSuccess = false
-    
+
     private let networkService: NetworkService = DefaultNetworkService()
-    
+
     var isFormValid: Bool {
         password.count >= 8
-        && password.range(of: "[A-Z]", options: .regularExpression) != nil
-        && password.range(of: "[a-z]", options: .regularExpression) != nil
-        && password.range(of: "[^A-Za-z0-9]", options: .regularExpression) != nil
-        && password == confirmPassword
-        && !confirmPassword.isEmpty
+            && password.range(of: "[A-Z]", options: .regularExpression) != nil
+            && password.range(of: "[a-z]", options: .regularExpression) != nil
+            && password.range(of: "[^A-Za-z0-9]", options: .regularExpression)
+                != nil
+            && password == confirmPassword
+            && !confirmPassword.isEmpty
     }
-    
+
     func resetPassword(email: String, code: String) {
         touchPassword = true
         touchConfirm = true
         validate()
         guard isFormValid else { return }
-        
+
         Task {
             await performResetPassword(email: email, code: code)
         }
     }
-    
+
     private func performResetPassword(email: String, code: String) async {
         isLoading = true
-        
+
         defer {
             isLoading = false
         }
-        
+
         do {
-            let response: APIResponse<String?> = try await networkService.request(
-                AuthEndpoint.resetPassword(email, code, password))
-            
+            let response: APIResponse<ResetPasswordData> =
+                try await networkService.request(
+                    AuthEndpoint.resetPassword(email, code, password)
+                )
+
             if response.success {
                 print("LOG: Şifrə uğurla yeniləndi")
                 isSuccess = true
@@ -68,8 +75,7 @@ final class ResetPasswordViewModel: ObservableObject {
                 alertMessage = response.message ?? "Xəta baş verdi"
                 showAlert = true
             }
-            
-            
+
         } catch let error as NetworkError {
             if case .serverError(let statusCode) = error {
                 if statusCode == 400 {
@@ -82,15 +88,13 @@ final class ResetPasswordViewModel: ObservableObject {
             }
             isSuccess = false
             showAlert = true
-        }
-        
-        catch  {
+        } catch {
             alertMessage = "Xəta baş verdi"
             isSuccess = false
             showAlert = true
         }
     }
-    
+
     private func validate() {
         // Password validation
         if touchPassword {
@@ -98,19 +102,27 @@ final class ResetPasswordViewModel: ObservableObject {
                 passwordError = "Sifre bos ola bilmez"
             } else if password.count < 8 {
                 passwordError = "Sifre en az 8 simvol olmalidir"
-            } else if password.range(of: "[A-Z]", options: .regularExpression) == nil {
+            } else if password.range(of: "[A-Z]", options: .regularExpression)
+                == nil
+            {
                 passwordError = "En az 1 boyuk herf olmalidir"
-            } else if password.range(of: "[a-z]", options: .regularExpression) == nil {
+            } else if password.range(of: "[a-z]", options: .regularExpression)
+                == nil
+            {
                 passwordError = "En az 1 kicik herf olmalidir"
-            } else if password.range(of: "[^A-Za-z0-9]", options: .regularExpression) == nil {
-                passwordError = "En az 1 xususi simvol olmalidir (@, #, ! ve s.)"
+            } else if password.range(
+                of: "[^A-Za-z0-9]",
+                options: .regularExpression
+            ) == nil {
+                passwordError =
+                    "En az 1 xususi simvol olmalidir (@, #, ! ve s.)"
             } else {
                 passwordError = nil
             }
         } else {
             passwordError = nil
         }
-        
+
         // Confirm validation
         if touchConfirm {
             if confirmPassword.isEmpty {
