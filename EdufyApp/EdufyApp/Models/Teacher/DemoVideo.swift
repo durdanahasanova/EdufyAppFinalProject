@@ -15,12 +15,14 @@ struct DemoVideo: Identifiable, Codable , Hashable{
     let duration: String
     let teacherName: String
     let teacherId: Int?
+   // let isLiked: Bool
     
     enum CodingKeys: String, CodingKey {
-        case id, title, duration
-        case thumbnailUrl = "thumbnail_url"
-        case videoUrl = "video_url"
-        case teacherName = "teacher_name"
-        case teacherId = "teacher_id"
+        case thumbnailUrl,videoUrl,teacherId //isLiked
+        case duration = "durationMinutes"
+        case teacherName = "programName"
+        case id = "lessonId"
+        case title = "lessonName"
+        
     }
 }

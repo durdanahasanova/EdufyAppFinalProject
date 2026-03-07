@@ -48,9 +48,9 @@ class TeacherViewModel: ObservableObject {
         Teacher(
             id: detail.id,
             photoUrl: detail.photoUrl ?? "",
-            fullName: detail.name,
-            specialization: detail.subject,
-            priceAzn: Int(detail.monthlyPrice.replacingOccurrences(of: " AZN", with: "")) ?? 0
+            fullName: detail.fullName,
+            specialization: detail.specialization,
+            priceAzn: Int(detail.priceAzn.replacingOccurrences(of: " AZN", with: "")) ?? 0
         )
     }
 }
