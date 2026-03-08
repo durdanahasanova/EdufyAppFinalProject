@@ -13,11 +13,6 @@ struct TeacherDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedVideo: DemoVideo?
 
-    //    init(teacherId: Int) {
-    //        _viewModel = StateObject(wrappedValue: TeacherDetailViewModel(teacherId: teacherId))
-    //
-    //    }
-
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16),

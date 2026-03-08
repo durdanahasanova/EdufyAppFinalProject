@@ -12,6 +12,7 @@ struct DiscoverView: View {
     @StateObject private var viewModel = DiscoverViewModel()
     @ObservedObject var favoritesManager = FavoritesManager.shared
     @State private var selectedVideo: FeedVideo?
+    @State private var searchTask: Task<Void, Never>?
 
     private let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -35,6 +36,31 @@ struct DiscoverView: View {
                                 .appFont(.bodyTextMdRegular)
                                 .foregroundStyle(.whiteMedium)
                         }
+                        
+                        //MARK: - Search
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.whiteHigh)
+
+                            TextField(
+                                "Kurs və ya müəllim axtar...",
+                                text: $viewModel.searchText
+                            )
+                            .foregroundColor(.whiteHigh)
+                            .autocorrectionDisabled()
+
+                            if !viewModel.searchText.isEmpty {
+                                Button {
+                                    viewModel.searchText = ""
+                                } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.whiteHigh)
+                                }
+                            }
+                        }
+                        .padding(14)
+                        .background(.graySecondary)
+                        .cornerRadius(32)
 
                         if viewModel.isLoading {
                             ProgressView()
@@ -58,11 +84,21 @@ struct DiscoverView: View {
             }
             .navigationDestination(item: $selectedVideo) { video in
                 VideoPlayerView(feedVideo: video)
+                    .hideTabBar()
                     
             }
         }
         .task {
             await viewModel.fetchVideos()
+        }
+        
+        .onChange(of: viewModel.searchText) { _, newValue in
+            searchTask?.cancel()
+            searchTask = Task {
+                try? await Task.sleep(nanoseconds: 500_000_000)
+                guard !Task.isCancelled else { return }
+                await viewModel.fetchVideos(search: newValue)
+            }
         }
     }
 }

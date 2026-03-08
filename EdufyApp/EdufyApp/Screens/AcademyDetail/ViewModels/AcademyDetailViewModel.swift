@@ -68,7 +68,7 @@ final class AcademyDetailViewModel: ObservableObject {
     }
     
     var graduatePercentage: Int {
-        academy?.graduationRate ?? 0
+        Int(academy?.graduationRate ?? 0.00)
     }
     
     var programs: [Program] {

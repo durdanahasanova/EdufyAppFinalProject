@@ -10,8 +10,11 @@ import SwiftUI
 struct CourseGridView: View {
 
     @StateObject private var viewModel = CourseViewModel()
+    @State private var searchTask: Task<Void, Never>?
+    var searchText: String = ""
 
     var body: some View {
+        
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 16) {
                 ForEach(viewModel.courses) { course in
@@ -22,6 +25,7 @@ struct CourseGridView: View {
                                 academyId: course.id
                             )
                         )
+                        .hideTabBar()
                     } label: {
                         CourseCard(
                             course: course,
@@ -34,6 +38,15 @@ struct CourseGridView: View {
         }
         .task {
             await viewModel.fetchCourses()
+        }
+
+        .onChange(of: searchText) { _, newValue in
+            searchTask?.cancel()
+            searchTask = Task {
+                try? await Task.sleep(nanoseconds: 500_000_000)
+                guard !Task.isCancelled else { return }
+                await viewModel.fetchCourses(search: newValue)
+            }
         }
     }
 }

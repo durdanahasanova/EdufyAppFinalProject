@@ -8,10 +8,6 @@
 import Combine
 import Foundation
 
-struct MessageResponse: Decodable {
-    let message: String?
-}
-
 @MainActor
 final class FavoritesManager: ObservableObject {
 

@@ -31,11 +31,14 @@ enum FeedEndpoint: Endpoint {
     var queryItems: [URLQueryItem]? {
         switch self {
         case .getVideos(let search, let page, let pageSize):
-            return [
-                URLQueryItem(name: "Search", value: search),
+            var items = [
                 URLQueryItem(name: "Page", value: "\(page)"),
-                URLQueryItem(name: "PageSize", value: "\(pageSize)"),
+                URLQueryItem(name: "PageSize", value: "\(pageSize)")
             ]
+            if !search.isEmpty {
+                items.append(URLQueryItem(name: "Search", value: search))
+            }
+            return items
         }
     }
 
