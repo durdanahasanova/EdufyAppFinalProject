@@ -5,61 +5,46 @@
 //  Created by Durdana on 16.02.26.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
+@MainActor
 class TeacherViewModel: ObservableObject {
-    
+
     @Published var teachers: [Teacher] = []
     @Published var isLoading = false
-    
-    func fetchTeachers() async {
-        
+    private let networkService: NetworkService = DefaultNetworkService()
+    @Published var searchText: String = ""
+   
+
+    func fetchTeachers(search: String = " ") async {
+
         isLoading = true
-        
+
         defer {
             isLoading = false
         }
-        
-        self.teachers = [
-            Teacher(id: "1",
-                    teacherPhoto: "https://via.placeholder.com/120",
-                    teacherName: "Durdana Hasanova",
-                    subject: "IOS Develooper",
-                    price: 120),
-            
-            Teacher(id: "2",
-                    teacherPhoto: "https://via.placeholder.com/120",
-                    teacherName: "Murad Hasanov",
-                    subject: "IOS Develooper",
-                    price: 120),
-            
-            Teacher(id: "3",
-                    teacherPhoto: "https://via.placeholder.com/120",
-                    teacherName: "Durdana Hasanova",
-                    subject: "IOS Develooper",
-                    price: 120),
-            
-            Teacher(id: "4",
-                    teacherPhoto: "https://via.placeholder.com/120",
-                    teacherName: "Durdana Hasanova",
-                    subject: "IOS Develooper",
-                    price: 120),
-            
-            Teacher(id: "5",
-                    teacherPhoto: "https://via.placeholder.com/120",
-                    teacherName: "Durdana Hasanova",
-                    subject: "IOS Develooper",
-                    price: 120),
-            
-            Teacher(id: "6",
-                    teacherPhoto: "https://via.placeholder.com/120",
-                    teacherName: "Durdana Hasanova",
-                    subject: "IOS Develooper",
-                    price: 120)
-            
-        ]
+
+        do {
+            let response: APIResponse<HomeResponse> =
+                try await networkService.request(
+                    HomeEndpoint.home(popularTake: 5, instructorTake: 5, search: search)
+                )
+
+            if response.success, let data = response.data,
+                let instructors = data.instructors
+            {
+                teachers = instructors
+                print("LOG: Teacher API-dan ugurla geldi")
+                return
+            }
+        } catch {
+            print("LOG: Fetch error: \(error), Mock data istifade olundu")
+        }
+
+       
+
     }
-    
-    
+
+
 }

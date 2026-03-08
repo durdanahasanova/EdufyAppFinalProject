@@ -43,3 +43,8 @@ extension Endpoint {
         return .success(request)
     }
 }
+
+extension Endpoint {
+    var baseURL: String {
+        "http://64.226.99.9:8080" }
+}

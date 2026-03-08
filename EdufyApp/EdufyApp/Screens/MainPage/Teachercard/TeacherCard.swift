@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct TeacherCard: View {
@@ -20,11 +19,11 @@ struct TeacherCard: View {
                     .clipped()
 
                 Text("\(lessonPrice) AZN")
-                    .font(.system(size: 14, weight: .semibold))
+                    .appFont(.textMdMedium)
                     .foregroundStyle(.white)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
-                    .background(.black.opacity(0.7))
+                    .background(.blackMedium)
                     .clipShape(Capsule())
                     .padding(12)
             }
@@ -36,7 +35,6 @@ struct TeacherCard: View {
                     .appFont(.bodyTextMdBold)
                     .foregroundStyle(.black)
                     .lineLimit(1)
-
 
                 Text(subject)
                     .appFont(.textMdMedium)
@@ -51,10 +49,10 @@ struct TeacherCard: View {
             } label: {
                 Text("Ətraflı bax")
                     .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.whiteHigh)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
-                    .background(Color(red: 0.95, green: 0.95, blue: 0.35))
+                    .background(.blackHigh)
                     .clipShape(Capsule())
             }
             .buttonStyle(.plain)
@@ -98,7 +96,12 @@ struct TeacherCard: View {
     }
 }
 
-
-//#Preview {
-//    TeacherCard(teacherPhoto: "https://via.placeholder.com/150", lessonPrice: 120, teacherName: "Durdana Hasanova", subject: "IOS Developer", onTapDetails: nil)
-//}
+#Preview {
+    TeacherCard(
+        teacherPhoto: "https://via.placeholder.com/150",
+        lessonPrice: 120,
+        teacherName: "Durdana Hasanova",
+        subject: "IOS Developer",
+        onTapDetails: nil
+    )
+}

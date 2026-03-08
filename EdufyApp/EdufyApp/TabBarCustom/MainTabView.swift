@@ -8,32 +8,37 @@
 import SwiftUI
 
 struct MainTabView: View {
+    
+    @Binding var isLoggedIn: Bool
+    @State private var selectedTab: TabItem = .home
+    @StateObject private var tabBarVisibility = TabBarVisibility()
+    
     var body: some View {
-        TabView {
-
-            MainPageView()
-                .tabItem {
-                    Image("tab_home")
-                    Text("Ana səhifə")
+        
+        ZStack(alignment: .bottom) {
+            Group {
+                switch selectedTab {
+                case .home:
+                    MainPageView()
+                case .explore:
+                    DiscoverView()
+                case .favorites:
+                    FavoritesView()
+                case .profile:
+                    ProfileView(isLoggedIn: $isLoggedIn)
                 }
-
-            Text("Kəşfet səhifəsi")
-                .tabItem {
-                    Image("tab_explore")
-                    Text("Kəşfet")
-                }
-
-            Text("Sevimlilər səhifəsi")
-                .tabItem {
-                    Image("tab_fav")
-                    Text("Sevimlilər")
-                }
-
-            Text("Profile səhifəsi")
-                .tabItem {
-                    Image("tab_profile")
-                    Text("Profile")
-                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.bottom, tabBarVisibility.isHidden ? 0 : 82)
+            .environment(\.tabBarVisibility, tabBarVisibility)
+            
+            
+            if !tabBarVisibility.isHidden {
+                CustomTabBar(selectedTab: $selectedTab)
+                    
+            }
         }
+        .ignoresSafeArea(edges: .bottom)
+        
     }
 }
