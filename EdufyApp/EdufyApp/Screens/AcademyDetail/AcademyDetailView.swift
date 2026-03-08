@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct AcademyDetailView: View {
-    
+
     @StateObject var viewModel: AcademyDetailViewModel
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
-            
+
             if viewModel.isLoading {
                 ProgressView()
                     .tint(.whiteHigh)
@@ -20,38 +20,44 @@ struct AcademyDetailView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        .navigationDestination(item: $viewModel.selectedProgram, destination: { program in
-            ProgramDetailView(viewModel: ProgramDetailViewModel(programId: program.id, instructorPhotoUrl: program.instructorPhotoUrl))
-            
-        })
+        .navigationDestination(
+            item: $viewModel.selectedProgram,
+            destination: { program in
+                ProgramDetailView(
+                    viewModel: ProgramDetailViewModel(
+                        programId: program.id,
+                        instructorPhotoUrl: program.instructorPhotoUrl
+                    )
+                )
+
+            }
+        )
         .task {
             await viewModel.fetchAcademyDetail()
         }
     }
-    
+
     // MARK: - Content
     private var contentView: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 20) {
-                
+
                 backButton
-                
+
                 DetailHeaderView(
                     logoName: viewModel.logoUrl,
                     name: viewModel.academyName
                 )
-                
-                
-                
+
                 VStack(alignment: .leading, spacing: 40) {
                     AboutSectionView(text: viewModel.aboutText)
-                    
+
                     StatsRowView(
                         applicationCount: viewModel.applicationCount,
                         studentCount: viewModel.studentCount,
                         graduatePercentage: viewModel.graduatePercentage
                     )
-                    
+
                     ProgramSectionView(
                         programs: viewModel.programs
                     ) { program in
@@ -62,7 +68,7 @@ struct AcademyDetailView: View {
             .padding(.horizontal, 16)
         }
     }
-    
+
     // MARK: - Back Button
     private var backButton: some View {
         Button {
@@ -72,10 +78,10 @@ struct AcademyDetailView: View {
             Image(systemName: "arrow.left")
                 .foregroundColor(.white)
                 .frame(width: 28, height: 28)
-            
+
         }
     }
-    
+
 }
 
 #Preview {

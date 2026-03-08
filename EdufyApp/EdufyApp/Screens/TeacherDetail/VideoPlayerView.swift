@@ -23,7 +23,12 @@ struct VideoPlayerView: View {
     @State private var player: AVPlayer?
 
     // MARK: - DemoVideo init
-    init(video: DemoVideo, instructorName: String, instructorId: Int, specialization: String) {
+    init(
+        video: DemoVideo,
+        instructorName: String,
+        instructorId: Int,
+        specialization: String
+    ) {
         self.videoUrl = video.videoUrl
         self.title = video.title
         self.duration = "\(video.duration)"
@@ -40,6 +45,16 @@ struct VideoPlayerView: View {
         self.teacherName = savedVideo.instructorFullName ?? "-"
         self.teacherId = savedVideo.instructorId
         self.specialization = ""
+    }
+
+    //MARK: - FeedVideo init
+    init(feedVideo: FeedVideo) {
+        self.videoUrl = feedVideo.videoUrl
+        self.title = feedVideo.title
+        self.duration = "\(feedVideo.duration) dəq"
+        self.teacherName = feedVideo.instructorName
+        self.specialization = feedVideo.programName ?? ""
+        self.teacherId = feedVideo.instructorId
     }
 
     var body: some View {

@@ -8,6 +8,10 @@
 import Combine
 import Foundation
 
+struct MessageResponse: Decodable {
+    let message: String?
+}
+
 @MainActor
 final class FavoritesManager: ObservableObject {
 
@@ -46,7 +50,7 @@ final class FavoritesManager: ObservableObject {
 
     private func saveToApi(videoId: Int) async {
         do {
-            let response: APIResponse<String?> =
+            let response: APIResponse<MessageResponse> =
                 try await networkService.request(
                     SaveVideoEndpoint.save(lessonId: videoId)
                 )
@@ -60,7 +64,7 @@ final class FavoritesManager: ObservableObject {
     // MARK: - API- favori sil
     private func deleteFromApi(videoId: Int) async {
         do {
-            let response: APIResponse<String?> =
+            let response: APIResponse<MessageResponse> =
                 try await networkService.request(
                     SaveVideoEndpoint.delete(lessonId: videoId)
                 )
