@@ -8,10 +8,6 @@
 import Combine
 import Foundation
 
-struct ResetPasswordData: Decodable {
-    let message: String?
-}
-
 @MainActor
 final class ResetPasswordViewModel: ObservableObject {
 
@@ -60,7 +56,7 @@ final class ResetPasswordViewModel: ObservableObject {
         }
 
         do {
-            let response: APIResponse<ResetPasswordData> =
+            let response: APIResponse<MessageResponse> =
                 try await networkService.request(
                     AuthEndpoint.resetPassword(email, code, password)
                 )

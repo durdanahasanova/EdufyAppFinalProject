@@ -47,7 +47,7 @@ final class ProfileViewModel: ObservableObject {
         Task {
             if let refreshToken = TokenManager.shared.refreshToken {
                 do {
-                    let token: APIResponse<String?> = try await networkService.request(AuthEndpoint.logout(refreshToken))
+                    let _: APIResponse<MessageResponse> = try await networkService.request(AuthEndpoint.logout(refreshToken))
                 } catch  {
                     print("LOG: Logout API xətası - \(error)")
                 }

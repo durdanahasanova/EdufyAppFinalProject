@@ -14,8 +14,10 @@ class TeacherViewModel: ObservableObject {
     @Published var teachers: [Teacher] = []
     @Published var isLoading = false
     private let networkService: NetworkService = DefaultNetworkService()
+    @Published var searchText: String = ""
+   
 
-    func fetchTeachers() async {
+    func fetchTeachers(search: String = " ") async {
 
         isLoading = true
 
@@ -26,7 +28,7 @@ class TeacherViewModel: ObservableObject {
         do {
             let response: APIResponse<HomeResponse> =
                 try await networkService.request(
-                    HomeEndpoint.home(popularTake: 5, instructorTake: 5)
+                    HomeEndpoint.home(popularTake: 5, instructorTake: 5, search: search)
                 )
 
             if response.success, let data = response.data,
@@ -40,19 +42,9 @@ class TeacherViewModel: ObservableObject {
             print("LOG: Fetch error: \(error), Mock data istifade olundu")
         }
 
-        //teachers = TeacherViewModel.mockTeachers
+       
 
     }
 
-//    static let mockTeachers: [Teacher] = TeacherMockData.all.map { detail in
-//        Teacher(
-//            id: detail.id,
-//            photoUrl: detail.photoUrl ?? "",
-//            fullName: detail.fullName,
-//            specialization: detail.specialization,
-//            priceAzn: Int(
-//                detail.priceAzn.replacingOccurrences(of: " AZN", with: "")
-//            ) ?? 0
-//        )
-//    }
+
 }

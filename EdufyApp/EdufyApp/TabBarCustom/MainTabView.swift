@@ -11,6 +11,7 @@ struct MainTabView: View {
     
     @Binding var isLoggedIn: Bool
     @State private var selectedTab: TabItem = .home
+    @StateObject private var tabBarVisibility = TabBarVisibility()
     
     var body: some View {
         
@@ -28,8 +29,14 @@ struct MainTabView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.bottom, 82)
-            CustomTabBar(selectedTab: $selectedTab)
+            .padding(.bottom, tabBarVisibility.isHidden ? 0 : 82)
+            .environment(\.tabBarVisibility, tabBarVisibility)
+            
+            
+            if !tabBarVisibility.isHidden {
+                CustomTabBar(selectedTab: $selectedTab)
+                    
+            }
         }
         .ignoresSafeArea(edges: .bottom)
         

@@ -85,8 +85,10 @@ struct ProfileView: View {
                         ) {
                             showResetPassword = false
                         }
+                        .hideTabBar()
 
                     }
+
                 )
 
                 //ALERT

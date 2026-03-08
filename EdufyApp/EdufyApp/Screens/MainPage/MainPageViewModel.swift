@@ -12,6 +12,7 @@ import Foundation
 final class MainPageViewModel: ObservableObject {
     private let networkService: NetworkService = DefaultNetworkService()
     @Published var userName: String = ""
+    @Published var searchText: String = ""
 
     func fetchUserData() async {
 

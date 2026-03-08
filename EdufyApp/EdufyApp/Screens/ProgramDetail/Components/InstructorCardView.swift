@@ -24,24 +24,29 @@ struct InstructorCardView: View {
                 Spacer(minLength: 0)
                 
                 // LinkedIn button
-                HStack(spacing: 0) {
-                    Text("Linkedin")
-                        .appFont(.textLRegular)
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
-                    
-                    Button(action: {}) {
-                        Image(systemName: "arrow.up.right")
-                            .foregroundColor(.black)
-                            .frame(width: 42, height: 42)
-                            .background(Color.primaryYellow)
-                            .clipShape(Circle())
+                if let linkedInUrl = instructor.linkedInUrl, let url = URL(string: linkedInUrl) {
+                    Link(destination: url) {
+                        HStack(spacing: 0) {
+                            Text("Linkedin")
+                                .appFont(.textLRegular)
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                            
+                            Button(action: {}) {
+                                Image(systemName: "arrow.up.right")
+                                    .foregroundColor(.black)
+                                    .frame(width: 42, height: 42)
+                                    .background(Color.primaryYellow)
+                                    .clipShape(Circle())
+                            }
+                            .padding(.trailing, 4)
+                        }
+                        .background(Color.white)
+                        .clipShape(Capsule())
                     }
-                    .padding(.trailing, 4)
                 }
-                .background(Color.white)
-                .clipShape(Capsule())
+                
             }
             .padding(20)
             .frame(maxHeight: .infinity)
@@ -78,10 +83,3 @@ struct InstructorCardView: View {
 }
 
 
-//#Preview {
-//    InstructorCardView(instructor: Instructor(id: 1,
-//                                              name: "Aysel Heyderova",
-//                                              bio: "ABB Bank-da Senior iOS developer olaraq fəaliyyət göstərir. 5 ildən artıq təcrübəyə malikdir.",
-//                                              imageUrl: "https://example.com/aysel.jpg",
-//                                              linkedinUrl: "https://linkedin.com/in/aysel"))
-//}

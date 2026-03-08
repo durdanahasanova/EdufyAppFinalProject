@@ -11,6 +11,8 @@ struct TeacherGridView: View {
 
     @StateObject private var viewModel = TeacherViewModel()
     @State private var selectedTeacherId: Int?
+    @State private var searchTask: Task<Void, Never>?
+    var searchText: String = ""
 
     private let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -49,11 +51,21 @@ struct TeacherGridView: View {
             TeacherDetailView(
                 viewModel: TeacherDetailViewModel(teacherId: teacherId)
             )
+            .hideTabBar()
         }
 
         .task {
             await viewModel.fetchTeachers()
         }
+        
+        .onChange(of: searchText) { _, newValue in
+                searchTask?.cancel()
+                searchTask = Task {
+                    try? await Task.sleep(nanoseconds: 500_000_000)
+                    guard !Task.isCancelled else { return }
+                    await viewModel.fetchTeachers(search: newValue)
+                }
+            }
 
     }
 }

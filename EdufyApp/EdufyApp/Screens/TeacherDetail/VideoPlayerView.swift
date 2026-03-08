@@ -131,7 +131,7 @@ struct VideoPlayerView: View {
                                         .appFont(.bodyTextMdSemibold)
                                         .foregroundStyle(.whiteHigh)
 
-                                    Text("Müəllim")
+                                    Text(specialization)
                                         .appFont(.textMdRegular)
                                         .foregroundStyle(.white.opacity(0.5))
                                 }

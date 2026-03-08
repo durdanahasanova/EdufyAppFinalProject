@@ -13,18 +13,18 @@ final class CourseViewModel: ObservableObject {
     @Published var courses: [Academy] = []
     @Published var isLoading: Bool = false
     private let networkService: NetworkService = DefaultNetworkService()
+    @Published var searchText: String = ""
 
-    func fetchCourses() async {
+    func fetchCourses(search: String = " ") async {
         isLoading = true
         defer {
             isLoading = false
         }
 
-        //TODO: - API qosacam
         do {
             let response: APIResponse<HomeResponse> =
                 try await networkService.request(
-                    HomeEndpoint.home(popularTake: 5, instructorTake: 5)
+                    HomeEndpoint.home(popularTake: 5, instructorTake: 5, search: search)
                 )
 
             if response.success, let data = response.data,
@@ -38,10 +38,12 @@ final class CourseViewModel: ObservableObject {
         } catch {
             print(
                 "LOG: Courses API xetasi - \(error). Mock data istifade olunur."
+                
             )
+            courses = CourseViewModel.mockCourses
         }
 
-        courses = CourseViewModel.mockCourses
+        
 
     }
 

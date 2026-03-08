@@ -16,7 +16,7 @@ struct AcademyDetail: Identifiable, Decodable {
     
     let totalApplications: Int
     let totalStudents: Int
-    let graduationRate: Int
+    let graduationRate: Double
 }
 
 

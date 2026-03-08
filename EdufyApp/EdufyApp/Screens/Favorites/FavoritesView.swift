@@ -68,6 +68,7 @@ struct FavoritesView: View {
             }
             .navigationDestination(item: $selectedVideo) { video in
                 VideoPlayerView(savedVideo: video)
+                    .hideTabBar()
             }
         }
         .task {
