@@ -57,7 +57,7 @@ struct FavoritesView: View {
                         } else {
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(favoritesManager.favoritesVideo) { video in
-                                    SavedVideoCard(video: video, onTap: { selectedVideo = video })
+                                    VideoCardView(video: video, onTap: { selectedVideo = video })
                                 }
                             }
                         }
