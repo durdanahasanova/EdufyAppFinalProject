@@ -38,12 +38,6 @@ final class FavoritesManager: ObservableObject {
         favoriteIDs.contains(videoId)
     }
 
-    // MARK: - UserDefaults
-    //    private func saveFavorites() {
-    //        let array = Array(favoriteIDs)
-    //        UserDefaults.standard.set(array, forKey: key)
-    //    }
-
     private func saveToApi(videoId: Int) async {
         do {
             let response: APIResponse<MessageResponse> =

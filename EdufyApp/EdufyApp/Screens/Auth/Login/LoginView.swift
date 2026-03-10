@@ -10,6 +10,9 @@ struct LoginView: View {
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea()
+//                    .onTapGesture {
+//                        hidekeyboard()
+//                    }
                 ScrollView{
                     VStack(spacing: 32) {
                         
@@ -44,14 +47,6 @@ struct LoginView: View {
                                 viewModel.touchPassword = true
                             }
                             
-                            //MARK: - Forgot password
-//                            NavigationLink {
-//                                ForgotPasswordView()
-//                            } label: {
-//                                Text("Parolu unutmuşam")
-//                                    .appFont(.bodyTextMdRegular)
-//                                    .foregroundStyle(.whiteHigh)
-//                            }
                             Button {
                                 showForgotPassword = true
                             } label: {
@@ -114,6 +109,9 @@ struct LoginView: View {
                 } message: {
                     Text(viewModel.apiError ?? "")
                 }
+//                .onTapGesture {
+//                    hideKeyboard()
+//                }
             }
         }
     }
