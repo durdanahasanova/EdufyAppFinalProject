@@ -10,6 +10,9 @@ struct MainPageView: View {
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea()
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
 
                 ScrollView {
 
@@ -60,6 +63,9 @@ struct MainPageView: View {
                                 .foregroundStyle(.whiteHigh)
                             TeacherGridView(searchText: viewModel.searchText)
                         }
+                    }
+                    .onTapGesture {
+                        hideKeyboard()
                     }
 
                 }

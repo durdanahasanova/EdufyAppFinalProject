@@ -24,6 +24,9 @@ struct ApplicationFormView: View {
         
             ZStack {
                 Color.background.ignoresSafeArea()
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
                 ScrollView{
                 VStack(alignment: .leading, spacing: 24) {
                     
@@ -108,7 +111,11 @@ struct ApplicationFormView: View {
                     )
                     
                 }
+                .onTapGesture {
+                    hideKeyboard()
+                }
                 .padding(16)
+                
             }
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $showSuccess) {

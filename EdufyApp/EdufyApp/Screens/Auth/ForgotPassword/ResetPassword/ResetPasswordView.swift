@@ -18,6 +18,9 @@ struct ResetPasswordView: View {
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
+                .onTapGesture {
+                    hideKeyboard()
+                }
             ScrollView {
                 VStack(alignment: .leading, spacing: 32) {
 
@@ -92,6 +95,9 @@ struct ResetPasswordView: View {
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 16)
+                .onTapGesture {
+                    hideKeyboard()
+                }
             }
         }
         .navigationBarBackButtonHidden(true)

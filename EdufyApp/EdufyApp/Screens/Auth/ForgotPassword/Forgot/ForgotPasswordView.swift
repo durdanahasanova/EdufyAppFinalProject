@@ -19,6 +19,9 @@ struct ForgotPasswordView: View {
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
+                .onTapGesture {
+                    hideKeyboard()
+                }
 
             VStack(alignment: .leading, spacing: 32) {
 
@@ -74,6 +77,9 @@ struct ForgotPasswordView: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 16)
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {

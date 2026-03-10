@@ -10,6 +10,10 @@ struct LoginView: View {
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea()
+                    .onTapGesture {
+                        print("Ekranın boş yerinə toxunuldu!")
+                        hideKeyboard()
+                    }
                 ScrollView{
                     VStack(spacing: 32) {
                         
@@ -98,6 +102,9 @@ struct LoginView: View {
                     
                     .padding(.top, 80)
                     .padding(.horizontal, 16)
+                }
+                .onTapGesture {
+                    hideKeyboard()
                 }
                 .navigationDestination(isPresented: $showForgotPassword) {
                     ForgotPasswordView(onSuccess: {
