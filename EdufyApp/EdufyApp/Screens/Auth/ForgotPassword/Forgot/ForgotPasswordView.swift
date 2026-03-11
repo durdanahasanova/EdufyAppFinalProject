@@ -11,14 +11,18 @@ struct ForgotPasswordView: View {
 
     @StateObject private var viewModel = ForgotPasswordViewModel()
     @Environment(\.dismiss) private var dismiss
-    var prefillEmail: String = ""
+    @Environment(\.tabBarVisibility) var tabBarVisibility
     @State private var passwordResetSuccess = false
+    var prefillEmail: String = ""
     var dismissOnSuccess: Bool = true
     var onSuccess: (() -> Void)? = nil
 
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
+                .onTapGesture {
+                    hideKeyboard()
+                }
 
             VStack(alignment: .leading, spacing: 32) {
 
@@ -74,6 +78,12 @@ struct ForgotPasswordView: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 16)
+            .onTapGesture {
+                hideKeyboard()
+            }
+        }
+        .onAppear {
+            tabBarVisibility?.isHidden = true
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {

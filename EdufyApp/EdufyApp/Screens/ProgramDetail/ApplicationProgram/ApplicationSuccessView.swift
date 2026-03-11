@@ -11,6 +11,7 @@ struct ApplicationSuccessView: View {
     
     let onOk: () -> Void
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.tabBarVisibility) var tabBarVisibility
     
     var body: some View {
         ZStack {
@@ -52,6 +53,7 @@ struct ApplicationSuccessView: View {
             }
             .padding(16)
         }
+        .onAppear { tabBarVisibility?.isHidden = true }
         .navigationBarBackButtonHidden(true)
     }
 }

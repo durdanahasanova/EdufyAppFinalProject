@@ -9,15 +9,20 @@ import SwiftUI
 
 struct ResetPasswordView: View {
 
+    @StateObject private var viewModel = ResetPasswordViewModel()
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.tabBarVisibility) var tabBarVisibility
+
     let email: String
     let code: String
     var onSuccess: (() -> Void)? = nil
-    @StateObject private var viewModel = ResetPasswordViewModel()
-    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
+                .onTapGesture {
+                    hideKeyboard()
+                }
             ScrollView {
                 VStack(alignment: .leading, spacing: 32) {
 
@@ -30,12 +35,12 @@ struct ResetPasswordView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Sifreni yenile")
+                        Text("Şifrəni yenilə")
                             .appFont(.titleLSemibold)
                             .foregroundStyle(.whiteHigh)
 
                         Text(
-                            "Mail-e kod gonderildi. Zehmet olmasa email-e daxil olub, kodu daxil edesiniz"
+                            "Mailinizə kod göndərildi. Zəhmət olmasa e-poçtunuza daxil olub, kodu daxil edin."
                         )
                         .appFont(.bodyTextMdRegular)
                         .foregroundStyle(.whiteMedium)
@@ -43,8 +48,8 @@ struct ResetPasswordView: View {
 
                     VStack(alignment: .leading, spacing: 24) {
                         EdufyTextField(
-                            tittle: "Yeni sifre",
-                            placeholder: "Sifreni yaz",
+                            tittle: "Yeni şifrə",
+                            placeholder: "Şifrəni yaz",
                             text: $viewModel.password,
                             error: viewModel.passwordError,
                             isSecure: true
@@ -56,8 +61,8 @@ struct ResetPasswordView: View {
                         }
 
                         EdufyTextField(
-                            tittle: "Yeni sifre tekrar",
-                            placeholder: "Tekrar sifreni yaz",
+                            tittle: "Yeni şifrə təkrar",
+                            placeholder: "Təkrar şifrəni yaz",
                             text: $viewModel.confirmPassword,
                             error: viewModel.confirmError,
                             isSecure: true
@@ -92,11 +97,17 @@ struct ResetPasswordView: View {
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 16)
+                .onTapGesture {
+                    hideKeyboard()
+                }
             }
+        }
+        .onAppear {
+            tabBarVisibility?.isHidden = true
         }
         .navigationBarBackButtonHidden(true)
         .alert(
-            viewModel.isSuccess ? "Ugurlu" : "Xeta",
+            viewModel.isSuccess ? "Uğurlu" : "Xəta",
             isPresented: $viewModel.showAlert
         ) {
             Button("OK", role: .cancel) {

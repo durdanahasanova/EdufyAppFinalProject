@@ -24,7 +24,6 @@ final class OTPViewModel: ObservableObject {
         
         errorMessage = nil
         
-        // TODO: API
         errorMessage = nil
         navigateToReset = true
     }

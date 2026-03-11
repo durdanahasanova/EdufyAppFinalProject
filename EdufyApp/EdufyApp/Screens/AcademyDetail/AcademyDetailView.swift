@@ -4,6 +4,7 @@ struct AcademyDetailView: View {
 
     @StateObject var viewModel: AcademyDetailViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.tabBarVisibility) var tabBarVisibility
 
     var body: some View {
         ZStack {
@@ -19,6 +20,7 @@ struct AcademyDetailView: View {
                 contentView
             }
         }
+        .onAppear { tabBarVisibility?.isHidden = true }
         .navigationBarBackButtonHidden(true)
         .navigationDestination(
             item: $viewModel.selectedProgram,

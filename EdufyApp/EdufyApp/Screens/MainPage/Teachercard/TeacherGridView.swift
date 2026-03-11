@@ -51,7 +51,7 @@ struct TeacherGridView: View {
             TeacherDetailView(
                 viewModel: TeacherDetailViewModel(teacherId: teacherId)
             )
-            .hideTabBar()
+            //.hideTabBar()
         }
 
         .task {

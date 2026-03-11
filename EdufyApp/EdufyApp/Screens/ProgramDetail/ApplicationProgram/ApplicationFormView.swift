@@ -10,6 +10,7 @@ import SwiftUI
 struct ApplicationFormView: View {
     @ObservedObject var viewModel: ProgramDetailViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.tabBarVisibility) var tabBarVisibility
 
     @State private var firstName: String = ""
     @State private var lastName: String = ""
@@ -24,6 +25,9 @@ struct ApplicationFormView: View {
         
             ZStack {
                 Color.background.ignoresSafeArea()
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
                 ScrollView{
                 VStack(alignment: .leading, spacing: 24) {
                     
@@ -108,7 +112,11 @@ struct ApplicationFormView: View {
                     )
                     
                 }
+                .onTapGesture {
+                    hideKeyboard()
+                }
                 .padding(16)
+                
             }
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $showSuccess) {
@@ -118,6 +126,7 @@ struct ApplicationFormView: View {
             }
             
         }
+            .onAppear { tabBarVisibility?.isHidden = true }
     }
 }
 

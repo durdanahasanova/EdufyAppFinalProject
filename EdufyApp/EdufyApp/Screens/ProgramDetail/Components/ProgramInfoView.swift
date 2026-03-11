@@ -11,9 +11,9 @@ struct ProgramInfoView: View {
             HStack(spacing: 12) {
                 Image(systemName: "calendar")
                     .font(.system(size: 18))
-                    .foregroundColor(.blackHigh)
+                    .foregroundColor(.black)
                     .frame(width: 40, height: 40)
-                    .background(.primaryYellow.opacity(0.7))
+                    .background(.yellowMedium)
                     .cornerRadius(12)
                 
                 VStack(alignment: .leading, spacing: 2) {
@@ -32,10 +32,10 @@ struct ProgramInfoView: View {
             HStack(spacing: 12) {
                 Image(systemName: "person.2")
                     .font(.system(size: 18))
-                    .foregroundColor(.blackHigh)
+                    .foregroundColor(.black)
                     .frame(width: 40, height: 40)
-                    .background(.primaryYellow.opacity(0.7))
-                    .cornerRadius(8)
+                    .background(.yellowMedium)
+                    .cornerRadius(12)
                 
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Qrup")

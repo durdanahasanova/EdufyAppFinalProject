@@ -4,12 +4,16 @@ import SwiftUI
 struct MainPageView: View {
 
     @StateObject private var viewModel = MainPageViewModel()
+    @Environment(\.tabBarVisibility) var tabBarVisibility
     //@State private var searchText: String = ""
 
     var body: some View {
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea()
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
 
                 ScrollView {
 
@@ -61,11 +65,15 @@ struct MainPageView: View {
                             TeacherGridView(searchText: viewModel.searchText)
                         }
                     }
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
 
                 }
                 .padding()
 
             }
+            .onAppear { tabBarVisibility?.isHidden = false }
         }
         .task {
             await viewModel.fetchUserData()

@@ -21,6 +21,7 @@ struct VideoPlayerView: View {
     @State private var navigateToTeacher = false
     @Environment(\.dismiss) private var dismiss
     @State private var player: AVPlayer?
+    @Environment(\.tabBarVisibility) var tabBarVisibility
 
     // MARK: - DemoVideo init
     init(
@@ -160,6 +161,7 @@ struct VideoPlayerView: View {
                 Spacer()
             }
         }
+        .onAppear { tabBarVisibility?.isHidden = true }
         .navigationBarBackButtonHidden(true)
         .onAppear {
             setupPlayer()

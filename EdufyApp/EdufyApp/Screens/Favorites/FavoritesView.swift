@@ -11,6 +11,7 @@ struct FavoritesView: View {
     
     @ObservedObject var favoritesManager = FavoritesManager.shared
     @State private var selectedVideo: SavedVideo?
+    @Environment(\.tabBarVisibility) var tabBarVisibility
     
     private let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -66,9 +67,10 @@ struct FavoritesView: View {
                     .padding(.bottom, 32)
                 }
             }
+            .onAppear { tabBarVisibility?.isHidden = false }
             .navigationDestination(item: $selectedVideo) { video in
                 VideoPlayerView(savedVideo: video)
-                    .hideTabBar()
+                    //.hideTabBar()
             }
         }
         .task {

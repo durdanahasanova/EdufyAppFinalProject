@@ -3,6 +3,7 @@ import SwiftUI
 struct ProgramDetailView: View {
     @StateObject var viewModel: ProgramDetailViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.tabBarVisibility) var tabBarVisibility
 
     var body: some View {
 
@@ -57,8 +58,9 @@ struct ProgramDetailView: View {
             }
 
         }
-
+        .onAppear { tabBarVisibility?.isHidden = true }
         .navigationBarBackButtonHidden(true)
+        
     }
 
     private var backButton: some View {

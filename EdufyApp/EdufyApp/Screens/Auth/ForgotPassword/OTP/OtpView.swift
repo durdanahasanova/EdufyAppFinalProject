@@ -13,10 +13,14 @@ struct OTPView: View {
     var onSuccess: (() -> Void)? = nil
     @StateObject private var viewModel = OTPViewModel()
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.tabBarVisibility) var tabBarVisibility
     
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
+                .onTapGesture {
+                    hideKeyboard()
+                }
             
             VStack(alignment: .leading, spacing: 32) {
                 
@@ -44,6 +48,7 @@ struct OTPView: View {
                     text: $viewModel.code,
                     error: viewModel.errorMessage
                 )
+                .keyboardType(.numberPad)
                 .onChange(of: viewModel.code) { oldValue, newValue in
                     if newValue.count > 6 {
                         viewModel.code = String(newValue.prefix(6))
@@ -67,8 +72,14 @@ struct OTPView: View {
                 
                 Spacer()
             }
+            .onTapGesture {
+                hideKeyboard()
+            }
             .padding(.horizontal, 16)
             .padding(.top, 16)
+        }
+        .onAppear {
+            tabBarVisibility?.isHidden = true
         }
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $viewModel.navigateToReset) {

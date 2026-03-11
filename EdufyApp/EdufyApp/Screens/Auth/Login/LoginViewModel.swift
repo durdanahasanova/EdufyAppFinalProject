@@ -78,9 +78,7 @@ final class LoginViewModel: ObservableObject {
         if touchPassword {
             if password.isEmpty {
                 passwordError = "Şifrə boş ola bilməz"
-            } else if password.count < 6 {
-                passwordError = "Şifrə Yanlisdir"
-            } else {
+            }  else {
                 passwordError = nil
             }
         }
