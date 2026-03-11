@@ -23,22 +23,3 @@ extension EnvironmentValues {
     }
 }
 
-struct HideTabBarModifier: ViewModifier {
-    @Environment(\.tabBarVisibility) var tabBarVisibility
-
-    func body(content: Content) -> some View {
-        content
-            .onAppear {
-                tabBarVisibility?.isHidden = true
-            }
-            .onDisappear {
-                tabBarVisibility?.isHidden = false
-            }
-    }
-}
-
-extension View {
-    func hideTabBar() -> some View {
-        self.modifier(HideTabBarModifier())
-    }
-}

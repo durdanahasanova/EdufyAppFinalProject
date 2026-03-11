@@ -10,6 +10,7 @@ import SwiftUI
 struct ApplicationFormView: View {
     @ObservedObject var viewModel: ProgramDetailViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.tabBarVisibility) var tabBarVisibility
 
     @State private var firstName: String = ""
     @State private var lastName: String = ""
@@ -125,6 +126,7 @@ struct ApplicationFormView: View {
             }
             
         }
+            .onAppear { tabBarVisibility?.isHidden = true }
     }
 }
 

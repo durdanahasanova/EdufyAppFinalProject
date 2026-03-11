@@ -13,6 +13,7 @@ struct DiscoverView: View {
     @ObservedObject var favoritesManager = FavoritesManager.shared
     @State private var selectedVideo: FeedVideo?
     @State private var searchTask: Task<Void, Never>?
+    @Environment(\.tabBarVisibility) var tabBarVisibility
 
     private let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -36,7 +37,7 @@ struct DiscoverView: View {
                                 .appFont(.bodyTextMdRegular)
                                 .foregroundStyle(.whiteMedium)
                         }
-                        
+
                         //MARK: - Search
                         HStack {
                             Image(systemName: "magnifyingglass")
@@ -82,16 +83,16 @@ struct DiscoverView: View {
                     .padding(.bottom, 32)
                 }
             }
+            .onAppear { tabBarVisibility?.isHidden = false }
             .navigationDestination(item: $selectedVideo) { video in
                 VideoPlayerView(feedVideo: video)
-                    .hideTabBar()
-                    
+
             }
         }
         .task {
             await viewModel.fetchVideos()
         }
-        
+
         .onChange(of: viewModel.searchText) { _, newValue in
             searchTask?.cancel()
             searchTask = Task {

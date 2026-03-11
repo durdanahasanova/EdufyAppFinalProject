@@ -12,6 +12,7 @@ struct TeacherDetailView: View {
     @StateObject var viewModel: TeacherDetailViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var selectedVideo: DemoVideo?
+    @Environment(\.tabBarVisibility) var tabBarVisibility
 
     private let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -149,6 +150,7 @@ struct TeacherDetailView: View {
                 .padding(.bottom, 32)
             }
         }
+        .onAppear { tabBarVisibility?.isHidden = true }
         .navigationDestination(item: $selectedVideo) { video in
             VideoPlayerView(
                 video: video,
@@ -157,6 +159,7 @@ struct TeacherDetailView: View {
                 specialization: viewModel.teacherDetail?.specialization ?? ""
             )
         }
+        
         .navigationBarBackButtonHidden(true)
         .task {
             await viewModel.fetchTeacherDetail()

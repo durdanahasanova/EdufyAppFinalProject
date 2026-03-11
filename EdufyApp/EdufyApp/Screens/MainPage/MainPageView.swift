@@ -4,6 +4,7 @@ import SwiftUI
 struct MainPageView: View {
 
     @StateObject private var viewModel = MainPageViewModel()
+    @Environment(\.tabBarVisibility) var tabBarVisibility
     //@State private var searchText: String = ""
 
     var body: some View {
@@ -72,6 +73,7 @@ struct MainPageView: View {
                 .padding()
 
             }
+            .onAppear { tabBarVisibility?.isHidden = false }
         }
         .task {
             await viewModel.fetchUserData()

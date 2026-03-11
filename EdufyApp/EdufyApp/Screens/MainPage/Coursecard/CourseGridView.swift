@@ -25,7 +25,7 @@ struct CourseGridView: View {
                                 academyId: course.id
                             )
                         )
-                        .hideTabBar()
+                       // .hideTabBar()
                     } label: {
                         CourseCard(
                             course: course,

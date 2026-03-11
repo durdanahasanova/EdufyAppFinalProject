@@ -11,8 +11,9 @@ struct ForgotPasswordView: View {
 
     @StateObject private var viewModel = ForgotPasswordViewModel()
     @Environment(\.dismiss) private var dismiss
-    var prefillEmail: String = ""
+    @Environment(\.tabBarVisibility) var tabBarVisibility
     @State private var passwordResetSuccess = false
+    var prefillEmail: String = ""
     var dismissOnSuccess: Bool = true
     var onSuccess: (() -> Void)? = nil
 
@@ -80,6 +81,9 @@ struct ForgotPasswordView: View {
             .onTapGesture {
                 hideKeyboard()
             }
+        }
+        .onAppear {
+            tabBarVisibility?.isHidden = true
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {

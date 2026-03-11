@@ -13,6 +13,7 @@ struct OTPView: View {
     var onSuccess: (() -> Void)? = nil
     @StateObject private var viewModel = OTPViewModel()
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.tabBarVisibility) var tabBarVisibility
     
     var body: some View {
         ZStack {
@@ -76,6 +77,9 @@ struct OTPView: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 16)
+        }
+        .onAppear {
+            tabBarVisibility?.isHidden = true
         }
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $viewModel.navigateToReset) {
